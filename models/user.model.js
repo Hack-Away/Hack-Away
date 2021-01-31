@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema();
+const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-    name: {
+    name:{
         type:String,
         required: 'User name is mandatory'
     },
-    role: {
+    role:{
         type:String,
         enum:['admin', 'user', 'costumer' ,'guest'],
         required: 'The role is mandatory',
