@@ -9,7 +9,7 @@ const userSchema = new Schema({
     role:{
         type:String,
         enum:['admin', 'user', 'costumer' ,'guest'],
-        required: 'The role is mandatory',
+        //required: 'The role is mandatory',
         default: 'user'
     },
     password:{
@@ -28,11 +28,11 @@ const userSchema = new Schema({
     },
     adult:{
         type: Boolean,
-        required: 'Under age is mandatory'
+        //required: 'Under age is mandatory'
     },
     phone:{
         type: String,
-        required: 'Phone is mandatory'
+        //required: 'Phone is mandatory'
     },
     image:{
         type: String,
@@ -41,7 +41,7 @@ const userSchema = new Schema({
     kitchen:{
         type:String,
         enum:['Mediterranean', 'Chinese', 'Mexican' ,'Arabic', 'Indian','italian'],
-        required: 'The  is mandatory'
+        //required: 'The  is mandatory'
     },
     favorites:{
         type:String,

@@ -5,6 +5,9 @@ const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false })); 
 
+// base de datos
+require('./config/db.config')
+
 
 // view engine
 app.set('views' , path.join(__dirname, 'views'));

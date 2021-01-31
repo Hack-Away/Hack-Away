@@ -3,11 +3,14 @@ const router = express.Router();
 
 const userController = require('../controllers/user.controller')
 
-router.get('/', userController.register);
-
-router.get('/users/new', (req, res, next) => {
-    res.render('users/new');
+router.get('/', (req, res, next) => {
+    res.render('home');
 });
+
+router.get('/users/new', userController.register);
+
+router.post('/users/new', userController.doRegister);
+
 
 
 
