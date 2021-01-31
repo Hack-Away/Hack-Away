@@ -8,8 +8,10 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/users/new', userController.register);
-
 router.post('/users/new', userController.doRegister);
+router.get('/users/login', userController.login);
+router.post('/users/login', userController.doLogin);
+//router.get('/users/profile', userController.profile);
 
 
 
