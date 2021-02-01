@@ -11,7 +11,7 @@ hbs.registerHelper('isInvalid', (error) => {
 });
 //
 
-hbs.registerHelper('isInvalid', (error) => {
-    return error ? new hbs.SafeDtring(`<div class="invalid-feedback">${error}</div>`) : ''
+hbs.registerHelper('formError', (error) => {
+    return error ? new hbs.SafeString(`<div class="invalid-feedback">${error}</div>`) : ''
 });
 

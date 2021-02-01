@@ -1,14 +1,14 @@
-<form method="Post" action="/users/new" class="my-5 mx-5">
+<form method="Post" action="/users/register" class="my-5 mx-5">
  
   <div class="form-group">
     <label for="name">User name</label>
-    <input type="text" name="name" class="form-control {{ isInvalid errors.name}}is-invalid{{/if}}" placeholder="Enter name" value="{{user.name}}">
-  {{formError errors.name }}
+    <input type="text" name="name" class="form-control {{ isInvalid errors.name}}" placeholder="Enter name" value="{{user.name}}">
+  {{ formError errors.name }}
   </div>
   
   <div class="form-group">
     <label for="email">Email address</label>
-    <input type="email" name="email" class="form-control {{#if errors.email}}" placeholder="Enter email" value="{{user.email}}">
+    <input type="email" name="email" class="form-control {{#if errors.email}} is-invalid{{/if}}" placeholder="Enter email" value="{{user.email}}">
     {{#if errors.email}}<div class="invalid-feedback">{{errors.email}} </div>{{/if}}
   </div>
 
@@ -28,7 +28,3 @@
   <button type="submit" class="btn btn-primary">Create User</button>
 </div>
 </form>
-
-{{#if errors.email}}errores!{{/if}}
-{{#if errors.password}}errores password!{{/if}}
-
