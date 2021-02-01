@@ -1,10 +1,14 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+//nuevo
+const EMAIL_PATTERN = /^(([^<>()[\]\\.,;:\s@']+(\.[^<>()[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const PASSWORD_PATTERN = /^.{8,}$/;
 
 const userSchema = new Schema({
     name:{
         type:String,
-        required: 'User name is mandatory'
+        required: 'User name is mandatory',
+        trim: true
     },
     role:{
         type:String,
@@ -15,13 +19,13 @@ const userSchema = new Schema({
     password:{
         type:String ,
         required: 'Password is required',
-        minlength: [8, 'Password at least have to be 8 char']
+        match: [PASSWORD_PATTERN, 'Password at least have to be 8 chars'] 
     },
     email:{
         type: String,
         required: 'Password is required',
-        // duda
-       // match: [8, 'Password needs at least 8 chars'],
+        // duda es necesaria nuevo
+        match: [EMAIL_PATTERN, 'Invalid '],
         lowercase: true,
         trim: true,
         unique: true
@@ -48,9 +52,8 @@ const userSchema = new Schema({
         enum:['Mediterranean', 'Chinese', 'Mexican' ,'Arabic', 'Indian','italian']
             
         }
-
-
-});
+//The timestamps option tells mongoose to assign createdAt and updatedAt fields to your schema. The type assigned is Date.
+}, {timestamps: true});
 
 const User = mongoose.model('User', userSchema);
 

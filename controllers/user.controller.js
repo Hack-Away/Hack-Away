@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const User = require('../models/user.model');
 require('../config/hbs.config');
 
-module.exports.register = (req, res, next) => {
+  module.exports.register = (req, res, next) => {
     res.render('users/new');
 }
 
@@ -62,3 +62,42 @@ module.exports.doLogin = (req, res, next) => {
     });
   
 }
+
+/*
+module.exports.register = (req, res, next) => {
+    res.render('users/new');
+}
+
+module.exports.doRegister = (req, res, next) => {
+  //nuevo
+
+  function renderWithErrors(errors) {
+    console.log(errors)
+    res.status(400).render('users/new', {
+      user:req.body,
+      errors:errors 
+    });
+  }
+
+  User.findOne({ email: req.body.email }) 
+  .then(user => {
+    if(user) {
+
+      renderWithErrors({ email: 'Error on e-mail'});
+    } else {
+
+      return  User.create(req.body)
+      .then(user => res.redirect('/posts'))
+     }
+    })
+
+  .catch(error => {
+    if (error instanceof mongoose.Error.ValidationError) {
+      renderWithErrors(error.errors);
+    } else {
+      next(error);
+    }
+  })
+  
+}
+*/
