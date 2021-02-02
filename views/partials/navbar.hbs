@@ -1,14 +1,21 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#"></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-            <a class="nav-item nav-link active" href="/">Hack-Away</a>
-            <a class="nav-item nav-link active" href="/users/login">Login</a>
-        </div>
-    </div>
-</nav>
 
+<div class="container-fluid">
+    <div class="row col-md">
+        <nav class="d-flex flex-row card p-3 bg-dark justify-content-between border border-dark mt-3">
+          
+            <ul class="nav justify-content-center">
+               
+                <li class="nav-item">
+                    <a href="/" class="text-decoration-none text-white p-1 ">Hack-Away</a>
+                </li>
+            </ul>
+            <ul class="nav ">
+                {{#if user}} <p class="text-secondary mx-2 text-right">Welcome {{user.name}} </p>{{/if}}
+                <li class="nav-item">  
+                    {{#unless user}}<a href="/users/login" class="text-decoration-none text-white p-1 text-right">Log In</a>{{/unless}}
+                    {{#if user}}<a href="/users/login" class="text-decoration-none text-white p-1 text-right">Log Out</a>{{/if}}
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>

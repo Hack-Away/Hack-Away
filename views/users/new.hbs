@@ -1,30 +1,39 @@
-<form method="Post" action="/users/register" class="my-5 mx-5">
- 
-  <div class="form-group">
-    <label for="name">User name</label>
-    <input type="text" name="name" class="form-control {{ isInvalid errors.name}}" placeholder="Enter name" value="{{user.name}}">
-  {{ formError errors.name }}
-  </div>
-  
-  <div class="form-group">
-    <label for="email">Email address</label>
-    <input type="email" name="email" class="form-control {{#if errors.email}} is-invalid{{/if}}" placeholder="Enter email" value="{{user.email}}">
-    {{#if errors.email}}<div class="invalid-feedback">{{errors.email}} </div>{{/if}}
-  </div>
+<div class="container-fluid w-75">
+    <h1 class="text-center my-2">Register New User</h1>
+    <div class="card bg-secondary my-3">
+      <form method="Post" action="/users/register" class="my-5 mx-5">
 
-<div class="d-flex flex-row justify-content-around my-3"> 
-  <div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
-    <input type="password" name="password" class="form-control {{#if errors.password}}is-invalid{{/if}}" id="exampleInputPassword1" placeholder="Password">
+        <div class="form-group">
+          <label for="name">User name</label>
+          <input type="text" name="name" class="form-control {{ isInvalid errors.name}}" placeholder="Enter name" value="{{user.name}}">
+          {{formError errors.name }}
+        </div>
+          
+        <div class="form-group mt-3">
+          <label for="email">Email address</label>
+          <input type="email" name="email" class="form-control {{#if errors.email}} is-invalid{{/if}}" placeholder="Enter email" value="{{user.email}}">
+          {{#if errors.email}}<div class="invalid-feedback">{{errors.email}} </div>{{/if}}
+        </div>
+
+        <div class="d-flex row justify-content-around "> 
+
+          <div class="form-group col-md-6 col-sm-12 my-3">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" name="password" class="form-control {{#if errors.password}}is-invalid{{/if}}" id="exampleInputPassword1" placeholder="Password">
+          </div>
+
+          <div class="form-group col-md-6 col-sm-12 mt-3">
+            <label for="exampleInputPassword1">Confirm Password</label>
+            <input type="password" name="passwordConfirm" class="form-control {{#if errors.password}}is-invalid{{/if}}" placeholder="Confirm Password">
+          </div>
+          {{#if errors.password}} <div class="invalid-feedback"> {{errors.password}} </div>{{/if}}
+
+        </div>
+
+        <div class="d-flex flex-row justify-content-around mt-4">
+          <button type="submit" class="btn btn-dark">Create User</button>
+        </div>
+
+      </form>
   </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Confirm Password</label>
-    <input type="password" name="passwordConfirm" class="form-control {{#if errors.password}}is-invalid{{/if}}" placeholder="Confirm Password">
-  </div>
-   
-  {{#if errors.password}} <div class="invalid-feedback"> {{errors.password}} </div>{{/if}}
 </div>
-<div class="d-flex flex-row justify-content-around my-3">
-  <button type="submit" class="btn btn-primary">Create User</button>
-</div>
-</form>
