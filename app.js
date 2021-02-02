@@ -2,8 +2,28 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const app = express();
+const bcrypt = require('bcrypt');
+require('dotenv').config()
+const session = require('./config/session.config');
 
 app.use(bodyParser.urlencoded({ extended: false })); 
+
+//Middelewares
+
+app.use(session);
+
+
+/* no esta protegido login
+app.use((req, res, next) => {
+  res.locals.currentUser = req.session.userId;
+  if (req.session.userId || req.path != '/login') {
+    next();
+  }else {
+    res.redirect('/login');
+  }
+
+})
+*/
 
 // base de datos
 require('./config/db.config')

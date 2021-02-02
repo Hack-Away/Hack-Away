@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 //nuevo
+const bcrypt = require('bcrypt');
 const EMAIL_PATTERN = /^(([^<>()[\]\\.,;:\s@']+(\.[^<>()[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const PASSWORD_PATTERN = /^.{8,}$/;
 
@@ -24,7 +25,7 @@ const userSchema = new Schema({
     email:{
         type: String,
         required: 'Password is required',
-        // duda es necesaria nuevo
+        
         match: [EMAIL_PATTERN, 'Invalid '],
         lowercase: true,
         trim: true,
@@ -51,9 +52,40 @@ const userSchema = new Schema({
         type:String,
         enum:['Mediterranean', 'Chinese', 'Mexican' ,'Arabic', 'Indian','italian']
             
+        },verfied: {
+            //guardamos fecha de verificacion
+            date: Date,
+            token: {
+                type: String,
+                default: () => 
+                Math.random().toString(36).substr(2)+
+                Math.random().toString(36).substr(2)+
+                Math.random().toString(36).substr(2)+
+                Math.random().toString(36).substr(2)+
+                Math.random().toString(36).substr(2)
+            }
         }
 //The timestamps option tells mongoose to assign createdAt and updatedAt fields to your schema. The type assigned is Date.
 }, {timestamps: true});
+
+userSchema.methods.checkPassword = function (passwordToCheck) {
+    return bcrypt.compare(passwordToCheck, this.password);
+  };
+
+userSchema.pre('save', function (next) {
+    if (this.isModified('password')) {
+        bcrypt.hash(this.password, 10).then((hash) => {
+            this.password = hash;
+            next();
+        });
+    } else {
+        next();
+    }
+});
+
+userSchema.methods.checkPassword = function (passwordToCheck) {
+    return bcrypt.compare(passwordToCheck, this.password);
+}
 
 const User = mongoose.model('User', userSchema);
 
