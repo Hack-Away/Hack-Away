@@ -5,9 +5,12 @@ const app = express();
 const bcrypt = require('bcrypt');
 require('dotenv').config()
 const session = require('./config/session.config');
+const morgan = require('morgan');
+
 
 app.use(bodyParser.urlencoded({ extended: false })); 
 
+app.use(morgan('dev'));
 //Middelewares
 
 app.use(session);

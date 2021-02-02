@@ -1,7 +1,5 @@
 const nodemailer = require('nodemailer');
-// para el env que no se suba a github instalado dotenv
-require('dotenv').config(); 
-
+ 
 const appUrl = process.env.APP_URL;
 const user = process.env.EMAIL_USER;
 const pass = process.env.EMAIL_PASSWORD;

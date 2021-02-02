@@ -3,6 +3,7 @@ const User = require('../models/user.model');
 require('../config/hbs.config');
 const bcrypt = require('bcrypt');
 
+
   module.exports.register = (req, res, next) => {
     res.render('users/new');
 }
@@ -52,10 +53,12 @@ module.exports.doLogin = (req, res, next) => {
       errors: errors
     });
   };
-
-  User.findOne({email: req.body.email},{password: req.body.password})
+console.log(req.body.password);
+console.log(req.body.email);
+  User.findOne({email: req.body.email})
     .then(user => { 
       console.log(user,'cuando devuelve el usuario')
+
       if (user){
         console.log('empieza a comprobar contraseña')
         user.checkPassword(req.body.password)
@@ -63,7 +66,7 @@ module.exports.doLogin = (req, res, next) => {
           if(match){
             console.log('coincide la password')
             req.session.currentUserId = user.id; 
-            res.render(`users/profile`, { user });
+            res.render('users/profile', { user });
           } else {
           // res.render('user/login', { user: req.body, errors: {password: 'Invalid password'}});
              console.log('no coincide las pass')
