@@ -52,25 +52,21 @@ const userSchema = new Schema({
         type:String,
         enum:['Mediterranean', 'Chinese', 'Mexican' ,'Arabic', 'Indian','italian']
             
-        },verfied: {
-            //guardamos fecha de verificacion
-            date: Date,
-            token: {
-                type: String,
-                default: () => 
-                Math.random().toString(36).substr(2)+
-                Math.random().toString(36).substr(2)+
-                Math.random().toString(36).substr(2)+
-                Math.random().toString(36).substr(2)+
-                Math.random().toString(36).substr(2)
-            }
+    },
+    verified: {
+        date: Date,
+        token: {
+            type: String,
+            default: () => 
+            Math.random().toString(36).substr(2)+
+            Math.random().toString(36).substr(2)+
+            Math.random().toString(36).substr(2)+
+            Math.random().toString(36).substr(2)+
+            Math.random().toString(36).substr(2)
         }
+    }
 //The timestamps option tells mongoose to assign createdAt and updatedAt fields to your schema. The type assigned is Date.
 }, {timestamps: true});
-
-userSchema.methods.checkPassword = function (passwordToCheck) {
-    return bcrypt.compare(passwordToCheck, this.password);
-  };
 
 userSchema.pre('save', function (next) {
     if (this.isModified('password')) {
@@ -84,6 +80,7 @@ userSchema.pre('save', function (next) {
 });
 
 userSchema.methods.checkPassword = function (passwordToCheck) {
+    console.log('check password')
     return bcrypt.compare(passwordToCheck, this.password);
 }
 

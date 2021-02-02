@@ -10,7 +10,6 @@ const bcrypt = require('bcrypt');
 module.exports.doRegister = (req, res, next) => {
 
   function renderWithErrors(errors) {
-    console.log(errors)
     res.status(400).render('users/new', {
       user:req.body,
       errors:errors 
@@ -30,7 +29,7 @@ module.exports.doRegister = (req, res, next) => {
           res.render(`users/profile`, {user});
         })
         .catch(error => {
-          renderWithErrors({password: 'password does not match'})
+          renderWithErrors({password:'Password needs 8 char at least'})
         })
     }
   
@@ -54,31 +53,25 @@ module.exports.doLogin = (req, res, next) => {
     });
   };
 
-  User.findOne({email: req.body.email, verified:{ $ne: null} , password: req.body.password})
+  User.findOne({email: req.body.email},{password: req.body.password})
     .then(user => { 
+      console.log(user,'cuando devuelve el usuario')
       if (user){
+        console.log('empieza a comprobar contraseña')
         user.checkPassword(req.body.password)
         .then(match => {
           if(match){
-            //sesion iniciada 2 opciones
-            req.session.currentUserId = user.id;
-            // req.session.userId = user.id; 
-            res.redirect('/home');
-          }else {
-           // res.render('user/login', { user: req.body, errors: {password: 'Invalid password'}});
-            res.render('user/login', { user: req.body, errors: { email: 'User not found or not verified'} }) 
+            console.log('coincide la password')
+            req.session.currentUserId = user.id; 
+            res.render(`users/profile`, { user });
+          } else {
+          // res.render('user/login', { user: req.body, errors: {password: 'Invalid password'}});
+             console.log('no coincide las pass')
+             res.render('users/login', { user: req.body, errors: { email: 'User not found or not verified'} }) 
           }
-/* revisar esta parte me da error y dara error sin esta lina por la declaracion linea 68 
-else {
-  res.render('user/login', { user: req.body, errors: { email: 'User not found or not verified'} })
-}
-*/
-
         });
-        // 
-        res.render(`users/profile`, { user });
       } else {
-        renderWithErrors({user: "User not find"});
+        renderWithErrors({user: "User not found"});
       }})
     .catch(error => {
       renderWithErrors(error);
