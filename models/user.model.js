@@ -70,6 +70,7 @@ const userSchema = new Schema({
 
 userSchema.pre('save', function (next) {
     if (this.isModified('password')) {
+        console.log('contraseña que se va cifrar');
         bcrypt.hash(this.password, 10).then((hash) => {
             this.password = hash;
             next();
