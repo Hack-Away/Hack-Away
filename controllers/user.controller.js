@@ -47,29 +47,28 @@ module.exports.login = (req, res, next) => {
 module.exports.doLogin = (req, res, next) => {
 
   function renderWithErrors(errors) {
-    console.log(errors)
+  
     res.status(400).render('users/login', {
       user: req.body,
       errors: errors
     });
   };
-console.log(req.body.password);
-console.log(req.body.email);
+
   User.findOne({email: req.body.email})
     .then(user => { 
-      console.log(user,'cuando devuelve el usuario')
+      
 
       if (user){
-        console.log('empieza a comprobar contraseña')
+        
         user.checkPassword(req.body.password)
         .then(match => {
           if(match){
-            console.log('coincide la password')
+            
             req.session.currentUserId = user.id; 
             res.render('users/profile', { user });
           } else {
           // res.render('user/login', { user: req.body, errors: {password: 'Invalid password'}});
-             console.log('no coincide las pass')
+             
              res.render('users/login', { user: req.body, errors: { email: 'User not found or not verified'} }) 
           }
         });

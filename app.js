@@ -6,6 +6,7 @@ const bcrypt = require('bcrypt');
 require('dotenv').config()
 const session = require('./config/session.config');
 const morgan = require('morgan');
+const User = require('./models/user.model');
 
 
 app.use(bodyParser.urlencoded({ extended: false })); 
@@ -15,17 +16,28 @@ app.use(morgan('dev'));
 
 app.use(session);
 
-
-/* no esta protegido login
+/*
 app.use((req, res, next) => {
   res.locals.currentUser = req.session.userId;
-  if (req.session.userId || req.path != '/login') {
-    next();
-  }else {
+ 
+  if (req.session.userId || req.path === '/login') {
+    User.findById(req.session.userId)
+    .then((user) => {
+      if (user) {
+      res.locals.currentUser = user;
+      req.currentUser = user;
+      next();
+      }else {
+        res.redirect('login');
+      }
+    })
+    .catch(() => {
+      res.redirect('/login');
+    });
+  }else{
     res.redirect('/login');
   }
-
-})
+});
 */
 
 // base de datos
