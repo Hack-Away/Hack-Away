@@ -29,3 +29,14 @@ module.exports.sendValidationEmail = (email, activationToken, name) => {
     })
     .catch(console.error);
 };
+
+/* 
+mi error en consola 
+code: 'EAUTH',
+  response: '535-5.7.8 Username and Password not accepted. Learn more at\n' +
+    '535 5.7.8  https://support.google.com/mail/?p=BadCredentials b7sm5940163wrs.50 - gsmtp',
+  responseCode: 535,
+  command: 'AUTH PLAIN'
+}
+
+*/

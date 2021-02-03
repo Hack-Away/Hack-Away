@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const User = require('../models/user.model');
 require('../config/hbs.config');
 const bcrypt = require('bcrypt');
+const mailer = require('../config/mailer.config');
 
 
   module.exports.register = (req, res, next) => {
@@ -17,17 +18,17 @@ module.exports.doRegister = (req, res, next) => {
     });
   };
 
-  User.findOne({email:req.body.email})
+  User.findOne({email:req.body.email, 'verified.date': { $ne: null } })
   .then(user => {
     if (user) {
       renderWithErrors({email:'Invalid email or password'})
     } else {
       
-      
-  
-      User.create(req.body)
+       return User.create(req.body)
         .then((user) => {
-          res.render(`users/profile`, {user});
+          mailer.sendValidationEmail(user.email, user.verified.token, user.name);
+          res.redirect('user/profile');
+          // res.render(`users/profile`, {user: req.body, errors: { email:'user not found'} });
         })
         .catch(error => {
           renderWithErrors({password:'Password needs 8 char at least'})
@@ -81,8 +82,17 @@ module.exports.doLogin = (req, res, next) => {
   
 }
 
-/*
-else {
-  res.render('user/login', { user: req.body, errors: { email: 'User not found or not verified'} })
-}
-*/
+module.exports.activate = (req, ses, next) => {
+  User.findOneAndUpdate({'verified.token': req.query.token},
+   { $set: {'verified.date': new Date() } },
+   { runValidators: true}, 
+   )
+   .then(user => {
+     if(user) {
+        res.redirect('user/login');
+     }else {
+      res.redirect('user/login');
+     }
+   })
+   .catch(next)
+};
