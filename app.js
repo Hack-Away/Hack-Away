@@ -3,6 +3,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const app = express();
 const bcrypt = require('bcrypt');
+const passport = require('passport');
 require('dotenv').config()
 const session = require('./config/session.config');
 const morgan = require('morgan');

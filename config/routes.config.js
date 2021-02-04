@@ -19,6 +19,9 @@ router.get('/', (req, res, next) => {
         })  
 });
 
+//no estoy seguro si la ruta aqui es la correcta
+router.get('/activate', userController.activate);
+
 router.get('/users/register', userController.register);
 router.post('/users/register', userController.doRegister);
 router.get('/users/login', userController.login);
