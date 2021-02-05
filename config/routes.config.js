@@ -3,6 +3,7 @@ const router = express.Router();
 const productController = require('../controllers/product.controller')
 const userController = require('../controllers/user.controller')
 const Product = require('../models/product.model')
+const secure = require('../middlewares/secure.middlewares')
 
 router.get('/', (req, res, next) => {
     Product.find()
@@ -20,16 +21,16 @@ router.get('/', (req, res, next) => {
 });
 
 //no estoy seguro si la ruta aqui es la correcta
-router.get('/activate', userController.activate);
+router.get('/activate',secure.isAuthenticated, userController.activate);
 
-router.get('/users/register', userController.register);
-router.post('/users/register', userController.doRegister);
+router.get('/users/register',secure.isAuthenticated, userController.register);
+router.post('/users/register',secure.isAuthenticated, userController.doRegister);
 router.get('/users/login', userController.login);
 router.post('/users/login', userController.doLogin);
-//router.get('/users/profile', userController.profile);
+//router.get('/users/profile',secure.isAuthenticated, userController.profile);
 
-router.get('/products/register', productController.register);
-router.post('/products/register', productController.createProduct);
+router.get('/products/register',secure.isAuthenticated, productController.register);
+router.post('/products/register',secure.isAuthenticated, productController.createProduct);
 
 
 module.exports = router;

@@ -6,22 +6,38 @@ const bcrypt = require('bcrypt');
 const passport = require('passport');
 require('dotenv').config()
 const session = require('./config/session.config');
+//nuevo
+require('./config/passport.config')
 const morgan = require('morgan');
 const User = require('./models/user.model');
-
 
 app.use(bodyParser.urlencoded({ extended: false })); 
 
 app.use(morgan('dev'));
-//Middelewares
+// base de datos
+require('./config/db.config')
+// view engine
+app.set('views' , path.join(__dirname, 'views'));
+app.set('view engine', 'hbs');
+require('./config/hbs.config');
+app.use(express.static(path.join(__dirname, 'public'))); 
 
+//Middelewares
 app.use(session);
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use((req, res, next) => { 
+res.locals.path = req.path;
+res.locals.currentUser = req.user;
+next();
+});
 
 /*
 app.use((req, res, next) => {
   res.locals.currentUser = req.session.userId;
  
-  if (req.session.userId || req.path === '/login') {
+  if (req.session.userId || req.path !== '/login') {
     User.findById(req.session.userId)
     .then((user) => {
       if (user) {
@@ -29,29 +45,20 @@ app.use((req, res, next) => {
       req.currentUser = user;
       next();
       }else {
-        res.redirect('login');
+        res.redirect('/users/login');
       }
     })
     .catch(() => {
-      res.redirect('/login');
+      res.redirect('/users/login');
     });
   }else{
-    res.redirect('/login');
+    res.redirect('/users/login');
   }
 });
 */
 
-// base de datos
-require('./config/db.config')
 
 
-// view engine
-app.set('views' , path.join(__dirname, 'views'));
-app.set('view engine', 'hbs');
-require('./config/hbs.config');
-app.use(express.static(path.join(__dirname, 'public'))); 
-
-app.use((req,res,next) => { res.locals.path = req.path; next(); }); 
 
 const home = require('./config/routes.config'); 
 app.use('/', home); module.exports = app; 

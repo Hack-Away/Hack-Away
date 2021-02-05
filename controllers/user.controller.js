@@ -3,6 +3,7 @@ const User = require('../models/user.model');
 require('../config/hbs.config');
 const bcrypt = require('bcrypt');
 const mailer = require('../config/mailer.config');
+const passport = require('passport');
 
 
   module.exports.register = (req, res, next) => {
@@ -12,6 +13,8 @@ const mailer = require('../config/mailer.config');
 module.exports.doRegister = (req, res, next) => {
 
   function renderWithErrors(errors) {
+    console.log('usercontroller error');
+
     res.status(400).render('users/new', {
       user:req.body,
       errors:errors 
@@ -20,14 +23,16 @@ module.exports.doRegister = (req, res, next) => {
 
   User.findOne({email:req.body.email, 'verified.date': { $ne: null } })
   .then(user => {
+    console.log('usercontroller1');
     if (user) {
       renderWithErrors({email:'Invalid email or password'})
     } else {
-      
+      console.log('usercontroller2');
        return User.create(req.body)
         .then((user) => {
+          console.log('usercontroller3');
           mailer.sendValidationEmail(user.email, user.verified.token, user.name);
-          res.redirect('user/profile');
+          res.render('users/profile', { user });
           // res.render(`users/profile`, {user: req.body, errors: { email:'user not found'} });
         })
         .catch(error => {
@@ -45,26 +50,52 @@ module.exports.login = (req, res, next) => {
   res.render('users/login')
 }
 
+
 module.exports.doLogin = (req, res, next) => {
 
   function renderWithErrors(errors) {
-  
+
     res.status(400).render('users/login', {
       user: req.body,
       errors: errors
     });
   };
 
+  passport.authenticate('local-auth', (error, user, validations) => {
+    if(error){
+      next(error);
+    } else if (user){
+
+      req.login(user, error => {
+          if(error) next(error)
+          //revisar ruta
+          else res.redirect('/')
+
+      })
+      req.session.currentUserId = user.id
+      //revisar la ruta
+      
+      res.redirect('/')
+    } else{
+      res.render('users/profile', {user: req.body, errors: validations});
+    }
+
+  })(req, res, next);
+
+// nuevo logout
+  module.exports.logout = (req, res, next) => {
+    req.logout();
+    res.redirect('users/login')
+  }
+
+  /* 
+  en teoria se puede borrar esto pero checamos 
   User.findOne({email: req.body.email})
     .then(user => { 
-      
-
       if (user){
-        
         user.checkPassword(req.body.password)
         .then(match => {
           if(match){
-            
             req.session.currentUserId = user.id; 
             res.render('users/profile', { user });
           } else {
@@ -79,9 +110,8 @@ module.exports.doLogin = (req, res, next) => {
     .catch(error => {
       renderWithErrors(error);
     });
-  
+ */ 
 }
-
 module.exports.activate = (req, ses, next) => {
   User.findOneAndUpdate({'verified.token': req.query.token},
    { $set: {'verified.date': new Date() } },
@@ -89,9 +119,9 @@ module.exports.activate = (req, ses, next) => {
    )
    .then(user => {
      if(user) {
-        res.redirect('user/login');
+        res.redirect('users/login');
      }else {
-      res.redirect('user/login');
+      res.redirect('users/login');
      }
    })
    .catch(next)
