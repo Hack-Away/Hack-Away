@@ -62,22 +62,26 @@ module.exports.doLogin = (req, res, next) => {
   };
 
   passport.authenticate('local-auth', (error, user, validations) => {
+    console.log('usercontrollogin');
     if(error){
+      console.log('usercontrollogin1');
       next(error);
     } else if (user){
-
+      console.log('usercontrollogin2');
       req.login(user, error => {
           if(error) next(error)
           //revisar ruta
-          else res.redirect('/')
+          else res.render('users/profile', { user })
 
       })
       req.session.currentUserId = user.id
       //revisar la ruta
       
       res.redirect('/')
+
     } else{
-      res.render('users/profile', {user: req.body, errors: validations});
+      console.log('usercontrollo else');
+      res.render('users/login', {user: req.body, errors: validations});
     }
 
   })(req, res, next);
@@ -128,6 +132,22 @@ module.exports.activate = (req, ses, next) => {
 };
 
 
+module.exports.loginWithGoogle = (req, res, next) => {
+  passport.authenticate('google-auth', (error, user, validations) => {
+    if (error) {
+      next(error);
+    } else if (!user) {
+      res.status(400).render('users/login', { user: req.body, errors: validations });
+    } else {
+      req.login(user, error => {
+        if (error) next(error)
+        else res.redirect('/')
+      })
+    }
+  })(req, res, next);
+}
+
+/*
 module.exports.loginWithGoogle = (req, ses, next) => {
   passport.authenticate('google-auth', (error, user, validations )=> {
     if(error){
@@ -151,3 +171,4 @@ module.exports.loginWithGoogle = (req, ses, next) => {
   })(req, res, next);
 
  }
+ */

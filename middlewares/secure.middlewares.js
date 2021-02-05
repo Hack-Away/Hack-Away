@@ -4,12 +4,12 @@ module.exports.isAuthenticated = (req, res, next) => {
       next();
       } else {
         console.log('no autenticado');
-        res.redirect('/users/login');
-      }
+        res.status(401).redirect('users/login');
+        
+}
 }
 
-
-/* 
+/*
 const createError = require('http-errors');
 
 module.exports.isAuthenticated = (req, res, next) => {
@@ -30,5 +30,3 @@ module.exports.checkRole = (role) => {
   }
 }
 */
-
-

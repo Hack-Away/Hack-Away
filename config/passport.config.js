@@ -18,15 +18,18 @@ passport.serializeUser((user, next) => {
     usernameField: 'email',
     passwordField: 'password'
   },(email, password, next) => {
+    console.log('pasportconfig');
     User.findOne({ email })
       .then(user => {
+        console.log('pasportconfig1');
         if (!user) {
           next(null, null, { email: 'Invalid email or password'})
         } else {
+          console.log('pasportconfig3');
           return user.checkPassword(password)
             .then(match => {
               if (match) {
-               
+                console.log('pasportconfig4');
                 if (user.verified && user.verified.date) {
                   next(null, user)
                 } else {
@@ -37,7 +40,10 @@ passport.serializeUser((user, next) => {
               }
             })
         }
-      }).catch(next)
+      }).catch(error => {
+        console.log('pasportconfig2');
+        next();
+      })
   }));
   
 //aqui va los identificadores de la red social que queremos los id seretos y en envi codigo
