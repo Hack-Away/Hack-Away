@@ -1,12 +1,12 @@
 module.exports.isAuthenticated = (req, res, next) => {
  
   if (req.isAuthenticated()) {
+    console.log('user auteticathed');
       next();
-      } else {
+  }else{
         console.log('no autenticado');
-        res.status(401).redirect('users/login');
-        
-}
+        res.render('users/new');
+       }
 }
 
 /*

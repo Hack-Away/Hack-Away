@@ -19,7 +19,7 @@ const userSchema = new Schema({
     },
     password:{
         type:String ,
-        required: 'Password is required',
+        required: 'User password is required',
         match: [PASSWORD_PATTERN, 'Password at least have to be 8 chars'] 
     },
     social: {
@@ -27,7 +27,7 @@ const userSchema = new Schema({
     },
     email:{
         type: String,
-        required: 'Password is required',
+        required: 'User e-mail is required',
         
         match: [EMAIL_PATTERN, 'Invalid '],
         lowercase: true,

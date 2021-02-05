@@ -25,9 +25,9 @@ router.get('/', (req, res, next) => {
 
 //no estoy seguro si la ruta aqui es la correcta
 router.get('/activate',secure.isAuthenticated, userController.activate);
-
-router.get('/users/register',secure.isAuthenticated, userController.register);
-router.post('/users/register',secure.isAuthenticated, userController.doRegister);
+//falta secure autenticade en rutas por bugs
+router.get('/users/register', userController.register);
+router.post('/users/register', userController.doRegister);
 router.get('/users/login', userController.login);
 router.post('/users/login', userController.doLogin);
 //router.get('/users/profile',secure.isAuthenticated, userController.profile);
