@@ -126,3 +126,28 @@ module.exports.activate = (req, ses, next) => {
    })
    .catch(next)
 };
+
+
+module.exports.loginWithGoogle = (req, ses, next) => {
+  passport.authenticate('google-auth', (error, user, validations )=> {
+    if(error){
+      next(error);
+    } else if (user){
+
+      req.login(user, error => {
+          if(error) next(error)
+          //revisar ruta
+          else res.redirect('/')
+
+      })
+      req.session.currentUserId = user.id
+      //revisar la ruta
+      
+      res.redirect('/')
+    } else{
+      res.render('users/profile', {user: req.body, errors: validations});
+    }
+
+  })(req, res, next);
+
+ }
