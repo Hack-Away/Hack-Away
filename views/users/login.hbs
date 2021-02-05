@@ -11,12 +11,14 @@
             {{#if errors.user}}<div class="invalid-feedback">{{errors.user}} </div>{{/if}}
         </div>
 
-    //nuevo
-{{if errors.oauth}}
+        
+    
+{{#if errors.oauth}}
     <div class="alert alert-danger" role="alert">
         {{errors.oauth}}
     </div>
-        {{/if}}
+{{/if}}
+
         <div class="form-group">
                 <label for="exampleInputPassword1">Password</label>
                 <input type="password" name="password" class="form-control {{#if errors.password}}is-invalid{{/if}}"
