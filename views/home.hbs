@@ -6,7 +6,6 @@
         </div>
         <div>
             <button class="btn btn-secondary"><a href="/users/register" class="text-white text-decoration-none p-2">New user</a></button>
-            <button class="btn btn-secondary"><a href="/products/register" class="text-white text-decoration-none p-2 ">New Product</a></button>
         </div>
   
         <div>
@@ -21,14 +20,14 @@
                     <h3 class="text-center mb-3">Productos</h3>
                     {{#each products as |product|}}
                     <a href="/" class="text-decoration-none text-dark">
-                        <div class="card m-1 p-3 d-flex flex-row align-items-around">
+                        <div class="card m-1 p-3 d-flex flex-row"> 
                             <img src="{{product.image}}" alt="" class="bg-secondary" style="width: 100px; height:100px">
-                            <div class="px-3">
+                            <div class="px-2 d-flex flex-column">
                                 <div class="d-flex flex-row justify-content-between">
                                     <p><strong>{{product.name}}</strong></p>
                                     <p class="bg-warning p-1 rounded">xx m</p><!--  aqui habrá que meter la distancia cuando hagamos el tema del maps -->
                                 </div>
-                                <P>{{product.description}}</P>
+                                <p>{{{maxText product.description}}}</p>
                             </div>
                         </div>
                     </a>

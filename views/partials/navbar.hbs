@@ -10,7 +10,7 @@
                 </li>
             </ul>
             <ul class="nav ">
-                {{#if currentUser}} <p class="text-secondary mx-2 text-right">Welcome {{currentUser.name}} </p>{{/if}}
+                {{#if currentUser}} <p class="text-secondary mx-2 text-right"><a href="/users/profile/{{currentUser.id}}"> Welcome {{currentUser.name}} </a></p>{{/if}}
                 <li class="nav-item">  
                     
                     {{#unless currentUser}}<a href="/users/login" class="text-decoration-none text-white p-1 text-right">Log In</a>{{/unless}}

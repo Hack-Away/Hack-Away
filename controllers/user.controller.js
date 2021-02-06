@@ -4,6 +4,7 @@ require('../config/hbs.config');
 const bcrypt = require('bcrypt');
 const mailer = require('../config/mailer.config');
 const passport = require('passport');
+const Product = require('../models/product.model')
 
 
   module.exports.register = (req, res, next) => {
@@ -96,7 +97,7 @@ module.exports.doLogin = (req, res, next) => {
 
 // nuevo logout
   module.exports.logout = (req, res, next) => {
-    req.logout();
+    req.Logout();
     res.redirect('users/login')
   }
 
@@ -180,3 +181,18 @@ module.exports.loginWithGoogle = (req, ses, next) => {
 
  }
  */
+
+ module.exports.profile = (req,res,next) => {
+   const {currentUser} = res.locals;
+   console.log(currentUser._id)
+   Product.find({createdBy:currentUser._id})
+    .then(products => {
+      res.render('users/profile', {
+        currentuser: currentUser,
+        products: products,
+      })
+    })
+    .catch(error => {'error: ', console.log(error)})
+
+  
+ }
