@@ -16,7 +16,9 @@ module.exports.createProduct = (req, res, next) => {
         });
     };
 
-    console.log(req.body)
+    console.log('----------------------------------------->', res.locals.currentUser._id)
+    const { currentUserId} = res.locals.currentUser._id;
+    req.body.createdBy = res.locals.currentUser._id;
 
     Product.create(req.body)
         .then(product => {
