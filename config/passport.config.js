@@ -33,6 +33,7 @@ passport.serializeUser((user, next) => {
                 if (user.verified && user.verified.date) {
                   next(null, user)
                 } else {
+                  console.log('elseverifier');
                   next(null, null, { email: 'Your account is not validated jet, please check your email' })
                 }
               } else {
