@@ -5,7 +5,7 @@ const userController = require('../controllers/user.controller')
 const Product = require('../models/product.model')
 const secure = require('../middlewares/secure.middlewares')
 //nuevo
-const GOOGLE_OAUTH_SCOPES = ['http://www.googleapis.com/auth/userinfo.email', 'http://www.googleapis.com/auth/userinfo.profile'];
+const GOOGLE_OAUTH_SCOPES = ['https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile'];
 const passport = require('passport');
 
 router.get('/', (req, res, next) => {
