@@ -32,9 +32,10 @@ module.exports.doRegister = (req, res, next) => {
       console.log('crea usuario');
        return User.create(req.body)
         .then((user) => {
+          currentUser = user
           console.log('usuario creado en mongo');
           mailer.sendValidationEmail(user.email, user.verified.token, user.name);
-          res.render('users/profile', { user });
+          res.render('users/profile/:id', { currentUser });
         })
         .catch(error => {
           console.log('fallo al crear usuario');

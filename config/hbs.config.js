@@ -15,3 +15,6 @@ hbs.registerHelper('formError', (error) => {
     return error ? new hbs.SafeString(`<div class="invalid-feedback">${error}</div>`) : ''
 });
 
+hbs.registerHelper('maxText', (text) => {
+    return text.slice(0,50) + '...'
+})
