@@ -13,7 +13,7 @@ const passport = require('passport');
 module.exports.doRegister = (req, res, next) => {
 
   function renderWithErrors(errors) {
-    console.log('usercontroller error');
+    console.log(errors);
 
     res.status(400).render('users/new', {
       user:req.body,
@@ -23,25 +23,33 @@ module.exports.doRegister = (req, res, next) => {
 
   User.findOne({email:req.body.email, 'verified.date': { $ne: null } })
   .then(user => {
-    console.log('usercontroller1');
+    console.log('localiza usuario');
     if (user) {
-      renderWithErrors({email:'Invalid email or password'})
+      console.log('reconoce usuario');
+      renderWithErrors({emailRegister:'Invalid email or password'})
     } else {
-      console.log('usercontroller2');
+      console.log('crea usuario');
        return User.create(req.body)
         .then((user) => {
-          console.log('usercontroller3');
+          console.log('usuario creado en mongo');
           mailer.sendValidationEmail(user.email, user.verified.token, user.name);
           res.render('users/profile', { user });
-          // res.render(`users/profile`, {user: req.body, errors: { email:'user not found'} });
         })
         .catch(error => {
-          renderWithErrors({password:'Password needs 8 char at least'})
+          console.log('fallo al crear usuario');
+          if(error instanceof mongoose.Error.ValidationError){
+            renderWithErrors(error.errors)
+          }else {
+            renderWithErrors(error)
+            
+          }
+          
         })
     }
   
   })
   .catch(error => {
+    console.log('fallo al buscar usuario');
     renderWithErrors(error)
   })
 }
@@ -62,22 +70,26 @@ module.exports.doLogin = (req, res, next) => {
   };
 
   passport.authenticate('local-auth', (error, user, validations) => {
+    console.log('usercontrollogin');
     if(error){
+      console.log('usercontrollogin1');
       next(error);
     } else if (user){
-
+      console.log('usercontrollogin2');
       req.login(user, error => {
           if(error) next(error)
           //revisar ruta
-          else res.redirect('/')
+          else res.render('users/profile', { user })
 
       })
       req.session.currentUserId = user.id
       //revisar la ruta
       
       res.redirect('/')
+
     } else{
-      res.render('users/profile', {user: req.body, errors: validations});
+      console.log('usercontrollo else');
+      res.render('users/login', {user: req.body, errors: validations});
     }
 
   })(req, res, next);
@@ -126,3 +138,45 @@ module.exports.activate = (req, ses, next) => {
    })
    .catch(next)
 };
+
+
+module.exports.loginWithGoogle = (req, res, next) => {
+  passport.authenticate('google-auth', (error, user, validations) => {
+    if (error) {
+      next(error);
+    } else if (!user) {
+      res.status(400).render('users/login', { user: req.body, errors: validations });
+    } else {
+      req.login(user, error => {
+        if (error) next(error)
+        else res.redirect('/')
+      })
+    }
+  })(req, res, next);
+}
+
+/*
+module.exports.loginWithGoogle = (req, ses, next) => {
+  passport.authenticate('google-auth', (error, user, validations )=> {
+    if(error){
+      next(error);
+    } else if (user){
+
+      req.login(user, error => {
+          if(error) next(error)
+          //revisar ruta
+          else res.redirect('/')
+
+      })
+      req.session.currentUserId = user.id
+      //revisar la ruta
+      
+      res.redirect('/')
+    } else{
+      res.render('users/profile', {user: req.body, errors: validations});
+    }
+
+  })(req, res, next);
+
+ }
+ */

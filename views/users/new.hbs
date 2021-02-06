@@ -11,22 +11,25 @@
           
         <div class="form-group mt-3">
           <label for="email">Email address</label>
-          <input type="email" name="email" class="form-control {{#if errors.email}} is-invalid{{/if}}" placeholder="Enter email" value="{{user.email}}">
-          {{#if errors.email}}<div class="invalid-feedback">{{errors.email}} </div>{{/if}}
+          <input type="email" name="email" class="form-control {{isInvalid errors.email}}" placeholder="Enter email" value="{{user.email}}">
+          {{formError errors.email }}
         </div>
 
         <div class="d-flex row justify-content-around "> 
 
           <div class="form-group col-md-6 col-sm-12 my-3">
             <label for="exampleInputPassword1">Password</label>
-            <input type="password" name="password" class="form-control {{#if errors.password}}is-invalid{{/if}}" id="exampleInputPassword1" placeholder="Password">
+            <input type="password" name="password" class="form-control {{isInvalid errors.password}}" id="exampleInputPassword1" placeholder="Password">
           </div>
 
           <div class="form-group col-md-6 col-sm-12 mt-3">
             <label for="exampleInputPassword1">Confirm Password</label>
-            <input type="password" name="passwordConfirm" class="form-control {{#if errors.password}}is-invalid{{/if}}" placeholder="Confirm Password">
+            <input type="password" name="passwordConfirm" class="form-control {{isInvalid errors.password}}" placeholder="Confirm Password">
           </div>
-          {{#if errors.password}} <div class="invalid-feedback"><p>error con la contraseña</p></div>{{/if}}
+          {{#if errors.emailRegister}} {{ errors.emailRegister }} {{/if}}
+         {{#unless errors.emailRegister}}
+         {{formError errors.password }}
+         {{/unless}} 
         </div>
 
         <div class="d-flex flex-row justify-content-around mt-4">
