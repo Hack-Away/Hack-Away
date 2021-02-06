@@ -30,7 +30,7 @@ router.get('/users/register', userController.register);
 router.post('/users/register', userController.doRegister);
 router.get('/users/login', userController.login);
 router.post('/users/login', userController.doLogin);
-//router.get('/users/profile',secure.isAuthenticated, userController.profile);
+router.get('/users/profile/:id',secure.isAuthenticated, userController.profile);
 
 
 router.get('/products/register',secure.isAuthenticated, productController.register);
@@ -39,4 +39,7 @@ router.post('/products/register',secure.isAuthenticated, productController.creat
 router.get('/authentication/google', passport.authenticate('google-auth', { scope: GOOGLE_OAUTH_SCOPES }));
 router.get('/authentication/google/cb', userController.loginWithGoogle);
 
+router.post('/users/logout', secure.isAuthenticated, userController.logout);
+
 module.exports = router;
+

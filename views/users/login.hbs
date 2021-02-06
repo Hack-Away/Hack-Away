@@ -13,9 +13,9 @@
 
         
     
-{{#if errors.oauth}}
+{{#if errors.email}}
     <div class="alert alert-danger" role="alert">
-        {{errors.oauth}}
+        {{errors.email}}
     </div>
 {{/if}}
 
@@ -31,10 +31,10 @@
             <button type="submit" class="btn btn-dark">Log In</button>
         
             <a class="btn btn-secondary btn-block" href="/authentication/google"> <i class="fa fa-google"></i> Login with Google </a>
-            
+            <p class="text-center text-white">or <a href="/users/register" class="text-decoration-none text-dark">Create new User</a></p>
             
         </div>
-        <p class="text-center text-white">or <a href="/users/register" class="text-decoration-none text-dark">Create new User</a></p>
+        
 
     </form>
 

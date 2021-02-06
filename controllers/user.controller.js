@@ -85,7 +85,7 @@ module.exports.doLogin = (req, res, next) => {
       req.session.currentUserId = user.id
       //revisar la ruta
       
-      res.redirect('/')
+      res.redirect('/home')
 
     } else{
       console.log('usercontrollo else');
@@ -93,37 +93,16 @@ module.exports.doLogin = (req, res, next) => {
     }
 
   })(req, res, next);
+}
 
 // nuevo logout
-  module.exports.logout = (req, res, next) => {
-    req.logout();
-    res.redirect('users/login')
-  }
+module.exports.logout = (req, res, next) => {
+req.logout();
 
-  /* 
-  en teoria se puede borrar esto pero checamos 
-  User.findOne({email: req.body.email})
-    .then(user => { 
-      if (user){
-        user.checkPassword(req.body.password)
-        .then(match => {
-          if(match){
-            req.session.currentUserId = user.id; 
-            res.render('users/profile', { user });
-          } else {
-          // res.render('user/login', { user: req.body, errors: {password: 'Invalid password'}});
-             
-             res.render('users/login', { user: req.body, errors: { email: 'User not found or not verified'} }) 
-          }
-        });
-      } else {
-        renderWithErrors({user: "User not found"});
-      }})
-    .catch(error => {
-      renderWithErrors(error);
-    });
- */ 
-}
+  res.redirect('/users/login');
+};
+
+ 
 module.exports.activate = (req, ses, next) => {
   User.findOneAndUpdate({'verified.token': req.query.token},
    { $set: {'verified.date': new Date() } },
@@ -155,28 +134,14 @@ module.exports.loginWithGoogle = (req, res, next) => {
   })(req, res, next);
 }
 
-/*
-module.exports.loginWithGoogle = (req, ses, next) => {
-  passport.authenticate('google-auth', (error, user, validations )=> {
-    if(error){
-      next(error);
-    } else if (user){
-
-      req.login(user, error => {
-          if(error) next(error)
-          //revisar ruta
-          else res.redirect('/')
-
-      })
-      req.session.currentUserId = user.id
-      //revisar la ruta
-      
-      res.redirect('/')
-    } else{
-      res.render('users/profile', {user: req.body, errors: validations});
-    }
-
-  })(req, res, next);
-
- }
- */
+module.exports.profile = (req,res,next) => {
+  const {currentUser} = res.locals;
+ 
+  Product.find({createdBy:currentUser._id})
+   .then(products => {
+     res.render('users/profile', {
+       currentuser: currentUser,
+       products: products,
+     })
+   })
+   .catch(error => {'error: ', console.log(error)}) }
