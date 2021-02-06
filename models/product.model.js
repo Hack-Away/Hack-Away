@@ -30,7 +30,7 @@ const productSchema = new Schema({
     createdBy:{
         type:String,
         required: true,
-        default: 'no name'
+      
     }
 
 }, {timestamps:true});

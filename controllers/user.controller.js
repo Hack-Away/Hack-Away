@@ -4,6 +4,7 @@ require('../config/hbs.config');
 const bcrypt = require('bcrypt');
 const mailer = require('../config/mailer.config');
 const passport = require('passport');
+const Product = require('../models/product.model')
 
 
   module.exports.register = (req, res, next) => {
