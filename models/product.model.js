@@ -8,7 +8,7 @@ const productSchema = new Schema({
     },
     description:{
         type:String,
-        minlength: [50, 'Description needs 50 chars at least']
+        minlength: [140, 'Description needs 140 chars at least']
     },
     price:{
         type:Number,

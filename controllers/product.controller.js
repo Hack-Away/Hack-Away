@@ -38,3 +38,41 @@ module.exports.createProduct = (req, res, next) => {
            }
         })
 }
+
+module.exports.edit = (req,res,next) => {
+    function renderWithErrors(errors) {
+        console.log(errors)
+        res.status(400).render(`products/edit/${product.id}`, {
+            product: req.body,
+            errors: errors
+        });
+    };
+    const {productId} = req.params
+
+    console.log(req.params)
+
+    Product.findOne({ ObjectId: productId})
+        .then(product => {
+            console.log(product)
+            res.render('products/edit', {product})
+        })
+        .catch(error => {
+            renderWithErrors(error)
+        })
+    
+}
+
+module.exports.doEdit = (req,res,next) => {
+    // FALTA POR HACER
+    res.render(`users/profile}`)
+}
+
+module.exports.list = (res, req, next ) => {
+
+    const {userId} = req.params
+
+    console.log(userId)
+
+
+    res.render('products/list')
+}
