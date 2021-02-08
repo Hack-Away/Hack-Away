@@ -6,7 +6,6 @@ const bcrypt = require('bcrypt');
 const passport = require('passport');
 require('dotenv').config()
 const session = require('./config/session.config');
-//nuevo
 require('./config/passport.config')
 const morgan = require('morgan');
 const User = require('./models/user.model');
@@ -56,9 +55,6 @@ app.use((req, res, next) => {
   }
 });
 */
-
-
-
 
 const home = require('./config/routes.config'); 
 app.use('/', home); module.exports = app; 

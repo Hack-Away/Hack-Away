@@ -7,7 +7,7 @@ const passport = require('passport');
 const Product = require('../models/product.model')
 
 
-  module.exports.register = (req, res, next) => {
+module.exports.register = (req, res, next) => {
     res.render('users/new');
 }
 
@@ -17,6 +17,7 @@ module.exports.doRegister = (req, res, next) => {
     console.log(errors);
 
     res.status(400).render('users/new', {
+      
       user:req.body,
       errors:errors 
     });
@@ -24,21 +25,17 @@ module.exports.doRegister = (req, res, next) => {
 
   User.findOne({email:req.body.email, 'verified.date': { $ne: null } })
   .then(user => {
-    console.log('localiza usuario');
     if (user) {
-      console.log('reconoce usuario');
       renderWithErrors({emailRegister:'Invalid email or password'})
     } else {
-      console.log('crea usuario');
        return User.create(req.body)
         .then((user) => {
           currentUser = user
-          console.log('usuario creado en mongo');
+         
           mailer.sendValidationEmail(user.email, user.verified.token, user.name);
           res.render('users/profile/:id', { currentUser });
         })
         .catch(error => {
-          console.log('fallo al crear usuario');
           if(error instanceof mongoose.Error.ValidationError){
             renderWithErrors(error.errors)
           }else {
@@ -60,7 +57,6 @@ module.exports.login = (req, res, next) => {
   res.render('users/login')
 }
 
-
 module.exports.doLogin = (req, res, next) => {
 
   function renderWithErrors(errors) {
@@ -72,18 +68,31 @@ module.exports.doLogin = (req, res, next) => {
   };
 
   passport.authenticate('local-auth', (error, user, validations) => {
-    console.log('usercontrollogin');
     if(error){
-      console.log('usercontrollogin1');
       next(error);
     } else if (user){
-      console.log('usercontrollogin2');
       req.login(user, error => {
           if(error) next(error)
           //revisar ruta
-          else res.render('users/profile', { user })
+          else res.redirect('/');
+      });
+    } else{
+      res.render('users/login', {user: req.body, errors: validations});
+    }
 
-      })
+  })(req, res, next);
+};
+
+/*
+  passport.authenticate('local-auth', (error, user, validations) => {
+    if(error){
+      next(error);
+    } else if (user){
+      req.login(user, error => {
+          if(error) next(error)
+          //revisar ruta
+          else res.redirect('/', { user });
+      });
       req.session.currentUserId = user.id
       //revisar la ruta
       
@@ -96,11 +105,11 @@ module.exports.doLogin = (req, res, next) => {
 
   })(req, res, next);
 }
-
-// nuevo logout
+*/
+// logout
 module.exports.logout = (req, res, next) => {
-req.logout();
-
+  //req.session = null;
+  req.logout();
   res.redirect('/users/login');
 };
 

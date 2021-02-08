@@ -1,22 +1,11 @@
-module.exports.isAuthenticated = (req, res, next) => {
- 
-  if (req.isAuthenticated()) {
-    console.log('user auteticathed');
-      next();
-  }else{
-        console.log('no autenticado');
-        res.render('users/new');
-       }
-}
-
-/*
-const createError = require('http-errors');
+const User = require('../models/user.model');
 
 module.exports.isAuthenticated = (req, res, next) => {
   if (req.isAuthenticated()) {
     next();
   } else {
-    res.status(401).redirect('/login');
+    //res.status(401).redirect('user/login');
+    res.redirect('users/login');
   }
 };
 
@@ -29,4 +18,4 @@ module.exports.checkRole = (role) => {
     }
   }
 }
-*/
+
