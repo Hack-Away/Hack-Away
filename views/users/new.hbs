@@ -19,13 +19,15 @@
           <label for="exampleInputPassword1">Password</label>
           <input type="password" name="password" class="form-control {{#if errors.password}}is-invalid{{/if}}"
             id="exampleInputPassword1" placeholder="Password">
+          {{#if errors.password}} <div class="invalid-feedback">{{errors.password}}</div>{{/if}}
         </div>
+        <!--
         <div class="form-group col-md-6 col-sm-12 mt-3">
           <label for="exampleInputPassword1">Confirm Password</label>
           <input type="password" name="passwordConfirm" class="form-control {{#if errors.password}}is-invalid{{/if}}"
             placeholder="Confirm Password">
         </div>
-        {{#if errors.password}} <div class="invalid-feedback">{{errors.password}}</div>{{/if}}
+        -->
       </div>
       <div class="d-flex flex-row justify-content-around mt-4">
         <button type="submit" class="btn btn-dark">Create User</button>

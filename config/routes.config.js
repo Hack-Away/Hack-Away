@@ -12,7 +12,8 @@ router.get('/', (req, res, next) => {
     Product.find()
         .then(products => {
             if (products) {
-                res.render('home', { products });
+                let productsLimit = products.slice(0,3)
+                res.render('home', { products: productsLimit });
             } else {
                 res.render('home');
             }
@@ -33,13 +34,17 @@ router.post('/users/register', userController.doRegister);
 router.get('/users/login', userController.login);
 router.post('/users/login', userController.doLogin);
 router.get('/users/profile/:id', secure.isAuthenticated, userController.profile);
-router.post('/users/logout', secure.isAuthenticated, userController.logout);
+router.get('/users/logout', secure.isAuthenticated, userController.logout);
+router.get('/users/edit/:id', secure.isAuthenticated, userController.edit)
+router.post('/users/edit/:id', secure.isAuthenticated, userController.doEdit)
+router.get('/users/delete/:id', secure.isAuthenticated, userController.delete)
 
 router.get('/products/register', secure.isAuthenticated, productController.register);
 router.post('/products/register', secure.isAuthenticated, productController.createProduct);
 router.get('/products/edit/:id', secure.isAuthenticated, productController.edit)
 router.post('/products/edit/:id', secure.isAuthenticated, productController.doEdit)
 router.get('/products/list/:id', secure.isAuthenticated, productController.list)
+router.get('/products/delete/:id', secure.isAuthenticated, productController.delete)
 
 router.get('/cart', secure.isAuthenticated, cartController.cart);
 

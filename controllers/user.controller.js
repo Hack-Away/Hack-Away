@@ -127,10 +127,65 @@ module.exports.profile = (req,res,next) => {
   console.log('deberia buscar usuaruio para entrar en perfil con id')
   Product.find({createdBy:currentUser._id})
    .then(products => {
+     const productsLimit = products.slice(0,3)
      console.log('encuentra los productos del usuario y renderiza')
      res.render('users/profile', {
        currentUser: currentUser,
-       products: products,
+       products: productsLimit,
      })
    })
    .catch(error => {'error: ', console.log(error)}) }
+
+
+   module.exports.edit = (req,res, next) => {
+     res.render('users/edit')
+   }
+
+   module.exports.doEdit = (req,res,next) => {
+
+     function renderWithErrors(errors) {
+ 
+       res.status(400).render('users/login', {
+         user: req.body,
+         errors: errors
+       });
+     };
+
+    let { id } = req.params
+    
+    const currentUser = res.locals.currentUser;
+
+     User.findByIdAndUpdate(id, {$set: req.body})
+      .then(user => {
+        console.log(user)
+        res.redirect(`../../users/profile/${user.id}`)
+      })
+      .catch(error => {
+        renderWithErrors(error)
+      })
+   
+   }
+
+   module.exports.delete = (req,res,next) => {
+
+     function renderWithErrors(errors) {
+       console.log(errors)
+       res.status(400).render('/', {
+         user: req.body,
+         errors: errors
+       });
+     };
+
+    const {id} = req.params
+    console.log(id)
+
+    User.findByIdAndDelete(id)
+      .then(user => {
+        res.locals.currentUser = null;
+        res.redirect('/')
+        
+      })
+      .catch(error => {
+        renderWithErrors(error)
+      })
+   }

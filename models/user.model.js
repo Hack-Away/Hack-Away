@@ -66,6 +66,14 @@ const userSchema = new Schema({
             Math.random().toString(36).substr(2)+
             Math.random().toString(36).substr(2)
         }
+    },
+    description: {
+        type: String,
+        default: 'A few words about your restaurant...'
+    }, 
+    adress: {
+        type: String,
+        default: 'Calle Inventada, nº random'
     }
 }, {timestamps: true});
 
