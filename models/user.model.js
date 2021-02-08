@@ -28,7 +28,6 @@ const userSchema = new Schema({
     email:{
         type: String,
         required: 'User e-mail is required',
-        
         match: [EMAIL_PATTERN, 'Invalid '],
         lowercase: true,
         trim: true,
@@ -68,7 +67,6 @@ const userSchema = new Schema({
             Math.random().toString(36).substr(2)
         }
     }
-//The timestamps option tells mongoose to assign createdAt and updatedAt fields to your schema. The type assigned is Date.
 }, {timestamps: true});
 
 userSchema.pre('save', function (next) {
