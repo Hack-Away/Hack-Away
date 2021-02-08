@@ -83,32 +83,9 @@ module.exports.doLogin = (req, res, next) => {
   })(req, res, next);
 };
 
-/*
-  passport.authenticate('local-auth', (error, user, validations) => {
-    if(error){
-      next(error);
-    } else if (user){
-      req.login(user, error => {
-          if(error) next(error)
-          //revisar ruta
-          else res.redirect('/', { user });
-      });
-      req.session.currentUserId = user.id
-      //revisar la ruta
-      
-      res.redirect('/home')
 
-    } else{
-      console.log('usercontrollo else');
-      res.render('users/login', {user: req.body, errors: validations});
-    }
-
-  })(req, res, next);
-}
-*/
-// logout
 module.exports.logout = (req, res, next) => {
-  //req.session = null;
+  console.log('log out')
   req.logout();
   res.redirect('/users/login');
 };
@@ -147,11 +124,12 @@ module.exports.loginWithGoogle = (req, res, next) => {
 
 module.exports.profile = (req,res,next) => {
   const {currentUser} = res.locals;
- 
+  console.log('deberia buscar usuaruio para entrar en perfil con id')
   Product.find({createdBy:currentUser._id})
    .then(products => {
+     console.log('encuentra los productos del usuario y renderiza')
      res.render('users/profile', {
-       currentuser: currentUser,
+       currentUser: currentUser,
        products: products,
      })
    })

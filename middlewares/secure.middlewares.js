@@ -2,10 +2,12 @@ const User = require('../models/user.model');
 
 module.exports.isAuthenticated = (req, res, next) => {
   if (req.isAuthenticated()) {
+    
     next();
   } else {
+    console.log('no autenticado')
     //res.status(401).redirect('user/login');
-    res.redirect('users/login');
+    res.render('users/login');
   }
 };
 
