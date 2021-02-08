@@ -25,21 +25,17 @@ module.exports.doRegister = (req, res, next) => {
 
   User.findOne({email:req.body.email, 'verified.date': { $ne: null } })
   .then(user => {
-    console.log('localiza usuario');
     if (user) {
-      console.log('reconoce usuario');
       renderWithErrors({emailRegister:'Invalid email or password'})
     } else {
-      console.log('crea usuario');
        return User.create(req.body)
         .then((user) => {
           currentUser = user
-          console.log('usuario creado en mongo');
+         
           mailer.sendValidationEmail(user.email, user.verified.token, user.name);
           res.render('users/profile/:id', { currentUser });
         })
         .catch(error => {
-          console.log('fallo al crear usuario');
           if(error instanceof mongoose.Error.ValidationError){
             renderWithErrors(error.errors)
           }else {
@@ -60,7 +56,6 @@ module.exports.doRegister = (req, res, next) => {
 module.exports.login = (req, res, next) => {
   res.render('users/login')
 }
-
 
 module.exports.doLogin = (req, res, next) => {
 
