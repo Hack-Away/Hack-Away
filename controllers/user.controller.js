@@ -25,15 +25,19 @@ module.exports.doRegister = (req, res, next) => {
 
   User.findOne({email:req.body.email, 'verified.date': { $ne: null } })
   .then(user => {
+    
     if (user) {
       renderWithErrors({emailRegister:'Invalid email or password'})
     } else {
+       
        return User.create(req.body)
         .then((user) => {
-          currentUser = user
-         
+          console.log('--- USER CONTROLLER --- Crea un usuario nuevo y lo registra en la base de datos')
           mailer.sendValidationEmail(user.email, user.verified.token, user.name);
-          res.render('users/profile/:id', { currentUser });
+          console.log('--- USER CONTROLLER --- Termina la funcion de envio de Mail de Verificacion al usuario', user.mail)
+          // req.flash('data', JSON.stringify({verification: true}))
+          // res.redirect('users/profile')
+          res.render('users/profile', { sessionUser: user });
         })
         .catch(error => {
           if(error instanceof mongoose.Error.ValidationError){
@@ -72,6 +76,9 @@ module.exports.doLogin = (req, res, next) => {
       next(error);
     } else if (user){
       req.login(user, error => {
+        res.locals.sessionUser = user
+        console.log(res.locals)
+        console.log(user)
           if(error) next(error)
           //revisar ruta
           else res.redirect('/');
@@ -85,20 +92,22 @@ module.exports.doLogin = (req, res, next) => {
 
 
 module.exports.logout = (req, res, next) => {
-  console.log('log out')
   req.logout();
-  res.redirect('/users/login');
+  res.locals.sessionUser = ''
+  res.redirect('/');
 };
 
  
-module.exports.activate = (req, ses, next) => {
+module.exports.activate = (req, res, next) => {
   User.findOneAndUpdate({'verified.token': req.query.token},
    { $set: {'verified.date': new Date() } },
    { runValidators: true}, 
    )
    .then(user => {
      if(user) {
-        res.redirect('users/login');
+       console.log('el usuario se ha verificado correctamente')
+       // TODO Mensaje en pantalla diciendo que el usuario se ha verificado correctamente
+        res.redirect('/');
      }else {
       res.redirect('users/login');
      }
@@ -123,26 +132,51 @@ module.exports.loginWithGoogle = (req, res, next) => {
 }
 
 module.exports.profile = (req,res,next) => {
-  const {currentUser} = res.locals;
-  console.log('deberia buscar usuaruio para entrar en perfil con id')
-  Product.find({createdBy:currentUser._id})
-   .then(products => {
-     const productsLimit = products.slice(0,3)
-     console.log('encuentra los productos del usuario y renderiza')
-     res.render('users/profile', {
-       currentUser: currentUser,
-       products: productsLimit,
-     })
-   })
-   .catch(error => {'error: ', console.log(error)}) }
+
+  
+  const {id} = req.params;
+  console.log(res.locals.sessionUser)
+
+  if (res.locals.sessionUser === undefined) { 
+    res.locals.sessionUser = '';
+  }
+  
+  User.findById(id)
+      .then(user => {
+        if (user){
+          Product.find({ createdBy: user.id })
+            .then(products => {
+                const productsLimit = products.slice(0, 3)
+                res.render('users/profile', {
+                  user: user,
+                  products: productsLimit,
+                  sessionUserId: res.locals.sessionUser.id
+                })
+            })
+            .catch(error => {console.log(error)})
+        } else {
+          next()
+        }})
+      .catch(error => { console.log(error) })
+}
 
 
-   module.exports.edit = (req,res, next) => {
-     res.render('users/edit')
-   }
+module.exports.edit = (req,res, next) => {
+  
+  
 
-   module.exports.doEdit = (req,res,next) => {
+    const {id } = req.params;
 
+    User.findById(id)
+        .then(user => {
+          res.render('users/edit', {user})
+        })
+        .catch(error => console.log(error))
+    
+}
+
+module.exports.doEdit = (req,res,next) => {
+ 
      function renderWithErrors(errors) {
  
        res.status(400).render('users/login', {
@@ -152,21 +186,19 @@ module.exports.profile = (req,res,next) => {
      };
 
     let { id } = req.params
-    
-    const currentUser = res.locals.currentUser;
+   
 
-     User.findByIdAndUpdate(id, {$set: req.body})
+    User.findByIdAndUpdate(id, {$set: req.body})
       .then(user => {
-        console.log(user)
+      
         res.redirect(`../../users/profile/${user.id}`)
       })
       .catch(error => {
         renderWithErrors(error)
       })
-   
-   }
+}
 
-   module.exports.delete = (req,res,next) => {
+module.exports.delete = (req,res,next) => {
 
      function renderWithErrors(errors) {
        console.log(errors)
@@ -177,15 +209,15 @@ module.exports.profile = (req,res,next) => {
      };
 
     const {id} = req.params
-    console.log(id)
+    
 
     User.findByIdAndDelete(id)
       .then(user => {
-        res.locals.currentUser = null;
+        res.locals.sessionUser = null;
         res.redirect('/')
         
       })
       .catch(error => {
         renderWithErrors(error)
       })
-   }
+}

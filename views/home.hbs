@@ -1,25 +1,19 @@
 <div class="d-flex flex-column container-fluid align-items-center my-5 ">
     <div class="d-flex flex-column align-items-center">
-        <div>
+        <div class="mb-5">
             <h1 class="text-white text-center">Hack-Away</h1>
             <p class="text-center"> Best take-away app ever</p>
         </div>
-        <div>
-            <button class="btn btn-secondary"><a href="/users/register" class="text-white text-decoration-none p-2">New user</a></button>
-        </div>
-  
-        <div>
-            <h1 class="text-center m-5">UNDER CONSTRUCTION!</h1>
-        </div>
+    
     </div>
 
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-md-6 ">
                 <div class="card bg-secondary m-1 p-3">
-                    <h3 class="text-center mb-3">Productos</h3>
+                    <h3 class="text-center mb-3">Top Productos</h3>
                     {{#each products as |product|}}
-                    <a href="/" class="text-decoration-none text-dark">
+                    <a href="/products/detail/{{product.id}}" class="text-decoration-none text-dark">
                         <div class="card m-1 p-3 d-flex flex-row"> 
                             <img src="{{product.image}}" alt="" class="bg-secondary" style="width: 100px; height:100px">
                             <div class="px-2 d-flex flex-column">
@@ -36,18 +30,20 @@
             </div>
             <div class="col-sm-12 col-md-6 ">
                 <div class="card bg-secondary m-1 p-3">
-                    <h3 class="text-center mb-3">Under construction</h3>
-                    {{#each products as |product|}} <!--  ahora mismo está buscando por producto, aqui deberían venir una lista de restaurantes -->
-                    <div class="card m-1 p-3 d-flex flex-row align-items-around">
-                        <img src="" alt="" class="bg-secondary" style="width: 100px; height:100px">
-                        <div class="px-3">
-                            <div class="d-flex flex-row justify-content-between">
-                                <p><strong>Nombre del Restaurante</strong></p>
-                                <p>xxx m</p>
-                            </div>
-                            <P>Una breve descripción del restaurante para ir abriendo el apetito</P>
+                    <h3 class="text-center mb-3">Top Restaurantes</h3>
+                    {{#each users as |userList|}} <!--  ahora mismo está buscando por producto, aqui deberían venir una lista de restaurantes -->
+                    <a href="/users/profile/{{userList.id}}" class="text-decoration-none text-dark">
+                         <div class="card m-1 p-3 d-flex flex-row align-items-around">
+                             <img src="" alt="" class="bg-secondary" style="width: 100px; height:100px">
+                             <div class="px-3">
+                                 <div class="d-flex flex-row justify-content-between">
+                                     <p><strong>{{userList.name}}</strong></p>
+                                     <p>xxx m</p> <!--  aqui habrá que meter la distancia cuando hagamos el tema del maps -->
+                                 </div>
+                                 <P>{{{maxText userList.description}}}</P>
+                             </div>
                         </div>
-                    </div>
+                    </a>
                     {{/each}}
                 </div>
             </div>

@@ -10,11 +10,12 @@
                 </li>
             </ul>
             <ul class="nav ">
-                {{#if currentUser}} <p class="text-secondary mx-2 text-right"><a href="/users/profile/{{currentUser.id}}" class="text-secondary"> Welcome {{currentUser.name}} </a></p>{{/if}}
+                {{#if sessionUser}} <p class="text-secondary mx-2 text-right"><a href="/users/profile/{{sessionUser.id}}" class="text-secondary"> Welcome {{sessionUser.name}} </a></p>{{/if}}
+                 {{#unless sessionUser}} <p class="text-secondary mx-2 text-right"><a href="/users/register" class="text-secondary text-decoration-none"> Create New User</a> or </p>{{/unless}}
                 <li class="nav-item">  
                     
-                    {{#unless currentUser}}<a href="/users/login" class="text-decoration-none text-white p-1 text-right">Log In</a>{{/unless}}
-                    {{#if currentUser}}<a href="/users/logout" class="text-decoration-none text-white p-1 text-right">Log Out</a>{{/if}}
+                    {{#unless sessionUser}}<a href="/users/login" class="text-decoration-none text-white p-1 text-right">Log In</a>{{/unless}}
+                    {{#if sessionUser}}<a href="/users/logout" class="text-decoration-none text-white p-1 text-right">Log Out</a>{{/if}}
                 </li>
             </ul>
         </nav>

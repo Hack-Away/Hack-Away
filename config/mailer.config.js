@@ -10,23 +10,45 @@ const transport = nodemailer.createTransport({
     user,
     pass,
   },
+  tls: {
+    rejectUnauthorized: false
+  }
 });
 
 module.exports.sendValidationEmail = (email, activationToken, name) => {
- 
+  console.log('--- MAILER--- ejecuta funcion de enviar el mail')
+  console.log('--- MAILER --- ', email, activationToken, name)
+  console.log('--- MAILER---', user)
+
+  let message = {
+    from: email,
+    to: user,
+    subject: 'test',
+    html: '<p>test de prueba</p>'
+
+  }
   transport
-    .sendMail({
+    .sendMail(
+     {
       to: email,
-      from: `Hack-Away team <${user}>`,
+      from: user,
       subject: 'Activate your account',
-      html: `
+      html: 
+          `
 					<h1>Hi ${name}</h1>
 					<p>Click on the button below to activate your account </p>
 					<a href="${appUrl}/activate?token=${activationToken}" style="padding: 10px 20px; color: white; background-color: pink; border-radius: 5px;">Click here</a>
-				`,
-    })
-    .then(() => {
-      console.log('email sent');
-    })
-    .catch(console.error);
+          `
+    }
+      
+  )
+        .then(() => {
+          console.log('--- MAILER--- email de verificacion enviado');
+        })
+        .catch(error => {
+          console.log('--- MAILER--- error con la promesa sendMail --- no manda mail de verificacion')
+          console.log(error)
+        });
+
+    
 };
