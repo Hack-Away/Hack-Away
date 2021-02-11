@@ -33,6 +33,7 @@ router.post('/products/edit/:id', secure.isAuthenticated, productController.doEd
 router.get('/products/list/:id', productController.list)
 router.get('/products/delete/:id', secure.isAuthenticated, productController.delete)
 router.get('/products/detail/:id', productController.detail)
+router.get('/products/filter', productController.filter)
 
 router.get('/cart', secure.isAuthenticated, cartController.cart);
 

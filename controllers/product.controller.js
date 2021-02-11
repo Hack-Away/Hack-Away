@@ -1,6 +1,8 @@
 const mongoose  = require('mongoose');
 const Product = require('../models/product.model');
+const User = require('../models/user.model')
 require('../config/hbs.config');
+const qs = require('qs')
 
 module.exports.register = (req,res,next) => {
     res.render('products/new')
@@ -18,8 +20,9 @@ module.exports.createProduct = (req, res, next) => {
 
     
 
-    req.body.createdBy = res.locals.sessionUser._id;
+    req.body.createdBy = res.locals.sessionUser.name;
 
+ 
     const sessionUser = res.locals.sessionUser
 
     Product.create(req.body)
@@ -92,20 +95,28 @@ module.exports.list = (req, res, next ) => {
         });
     };
     
+    
     const { id } = req.params;
+    console.log('--- PRODUCT CONTROLLER ---', id)
+
+    User.findById(id)
+        .then(user => {
+            console.log(user)
+            Product.find({createdBy:user.name})
+                .then(products => {
+                    if (products) {
+                    res.render('products/list', {products, user})
+                } else {
+                    next()
+                }
+                })
+                .catch(error => {
+                    console.log(error)
+                    next()
+                })
+        })
+        .catch(error => console.log(error))
    
-    Product.find({createdBy:id})
-        .then(products => {
-            if(products){
-                res.render('products/list', {products})
-            } else {
-                next()
-            }
-        })
-        .catch(error => {
-            renderWithErrors(error)
-        })
- 
 }
 
 module.exports.delete = (req, res, next) => {
@@ -147,10 +158,11 @@ module.exports.detail = (req, res, next) => {
     }
     
     const sessionUser = res.locals.sessionUser;
+
     
     Product.findById(id)
         .then(product => {
-            console.log(sessionUser)
+            console.log('--- PRODUCT CONTROLLER ---', product)
             res.render('products/detail', {
                 product:product,
                 sessionUser: sessionUser
@@ -160,4 +172,29 @@ module.exports.detail = (req, res, next) => {
             renderWithErrors(error)
         }) 
     
+}
+
+module.exports.filter = (req, res, next) => {
+
+    const {filter = {}, sort = {}} = qs.parse(qs.stringify(req.query), {allowDots:true})
+    
+    if (filter.name) filter.name = new RegExp(filter.name, 'i')
+    else delete filter.name
+
+    const sortBy = {
+        price: sort.price === 'cheaper' ? -1 : 1,
+        productTime: sort.time === 'fast' ? -1 : 1 
+    }   
+    
+    Product.find(filter)
+            .sort(sortBy)
+            .then(products => {
+                console.log('---FILTER--- encuentra productos', products)
+                res.render('products/filter', { products })
+            })
+            .catch(error => { 
+                console.log('---FILTER--- no encuentra productos')
+                console.log(error)
+                next() 
+            })
 }

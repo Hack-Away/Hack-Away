@@ -29,7 +29,7 @@ hbs.registerHelper('userRole', (role) => {
 })
 
 hbs.registerHelper('userAdmin', (id, sessionUser) => {
-    if (id === sessionUser.id){
+    if (id === sessionUser.id || id === sessionUser.name){
         return ''
     } else {
         return 'd-none'
