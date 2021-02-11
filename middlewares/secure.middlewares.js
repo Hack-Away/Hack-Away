@@ -2,12 +2,12 @@ const User = require('../models/user.model');
 
 module.exports.isAuthenticated = (req, res, next) => {
   if (req.isAuthenticated()) {
-    
+    console.log('---SECURE--- autenticado')
+    // TODO Aqui debería chequear el rol y distribuirlo a las views?
     next();
   } else {
-    console.log('no autenticado')
-    //res.status(401).redirect('user/login');
-    res.render('users/login');
+    console.log('---SECURE--- no autenticado')
+    res.status(401).render('users/login');
   }
 };
 

@@ -1,12 +1,11 @@
-
 <div class="d-flex flex-column align-items-center my-3">
-    <h1><u>{{currentUser.name}}'s Profile</u></h1>
-    <p class="fs-6 text-secondary">{{currentUser.id}} - <strong class="text-dark">{{currentUser.role}}</strong></p>
-    <div class="row">
-        <div class="d-flex flex-row justify-content-around">
-            <a href="/products/register"><button class="btn btn-success p-2 m-2">Add Product</button></a>
-            <a href="/users/edit/{{currentUser.id}}"><button class="btn btn-primary p-2 m-2">Edit Profile</button></a>
-            <a href="/users/delete/{{currentUser.id}}"><button class="btn btn-danger p-2 m-2">Delete Profile</button></a>
+    <h1><u>{{user.name}}'s Profile</u></h1>
+    <p class="fs-6 text-secondary">{{user.id}} - <strong class="text-dark">{{user.role}}</strong></p>
+    <div class="row ">
+        <div class="d-flex flex-row justify-content-around {{{userAdmin user.id sessionUser}}}">
+            <a href="/products/register" class="{{{userRole user.role}}}"><button class="btn btn-success p-2 m-2">Add Product</button></a>
+            <a href="/users/edit/{{user.id}}"><button class="btn btn-primary p-2 m-2">Edit Profile</button></a>
+            <a href="/users/delete/{{user.id}}" class="{{userRole user.role}}"><button class="btn btn-danger p-2 m-2">Delete Profile</button></a>
         </div>
     </div>
     <div class="card container-fluid bg-secondary p-3" style="max-width: 700px;">
@@ -15,24 +14,24 @@
                 <img src="data:image/jpeg;base64,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" alt="">
             </div>
             <div class="col-xs-12 col-sm-7 p-3">
-                <p class="text-white fs-6 m-0">@: {{currentUser.email}}</p>
-                <p class="text-white fs-6 m-0">Phone: {{currentUser.phone}}</p>
-                <p class="text-white fs-6 m-0">Adress: {{currentUser.adress}}</p>
-                <p class="text-white fs-6 m-0">Kitchen: {{currentUser.kitchen}}</p>
-                <p class="text-white fs-6 m-0">Favorites: {{currentUser.favorites}}</p>
+                <p class="text-white fs-6 m-0">@: {{user.email}}</p>
+                <p class="text-white fs-6 m-0">Phone: {{user.phone}}</p>
+                <p class="text-white fs-6 m-0">Adress: {{user.adress}}</p>
+                <p class="text-white fs-6 m-0">Kitchen: {{user.kitchen}}</p>
+                <p class="text-white fs-6 m-0">Favorites: {{user.favorites}}</p>
             </div>
             <div class="col-xs-12 p-3 justify-content-center mt-2">
-                <h4 class="text-center">{{currentUser.name}}'s Description</h4>
-                <p>{{currentUser.description}}</p>
+                <h4 class="text-center">{{user.name}}'s Description</h4>
+                <p>{{user.description}}</p>
             </div>
         </div>
     </div>
     <div>
-        <a href="/products/list/{{currentUser.id}}" class="mt-4 text-white text-decoration-none btn btn-success">Ver todos los productos de {{currentUser.name}}</a>
+        <a href="/products/list/{{user.id}}" class="mt-4 text-white text-decoration-none btn btn-success">Ver todos los productos de {{user.name}}</a>
     </div>
     <hr>
     <div>
-        <h1 class="mb-4 text-center">Top Productos - {{currentUser.name}}</h1>
+        <h1 class="mb-4 text-center">Top Productos - {{user.name}}</h1>
 
         <div class="w-75 mx-auto">
 
@@ -46,39 +45,44 @@
 
                        <div class="d-flex col-xs-12 col-md-4 justify-content-center mb-4 py-2">
 
-                         <img src="{{product.image}}" alt="" class="bg-secondary mx-auto" style="width: 300px; height:300px">
+                            <img src="{{product.image}}" alt="" class="bg-secondary mx-auto w-100 h-100">
 
                        </div>
 
                        <div class="col-xs-12 col-md-8 float-left ">
                            
-                                <div class="d-flex flex-row justify-content-between align-items-center">
-                                    <h6><strong>{{product.name}}</strong></h6>
-                                </div>
-    
-                                <div class="d-flex flex-row justify-content-between">
-                                    <p>Price: {{product.price}} €</p>
-                                    <p>Time: {{product.productTime}} min</p>
-                                </div>
-    
-                                <div class="mt-3 float-left">
-                                   <h6>Product Description</h6>
-                                   <p>{{product.description}}</p>
-                                </div>
-                                <div class="mt-3 float-left">
-                                    <h6>Alérgenos</h6>
-                                    {{product.allergies}}
-                                </div>
+                            <div class="d-flex flex-row justify-content-between align-items-center">
+                                <h6><strong>{{product.name}}</strong></h6>
+                            </div>
+
+                            <div class="d-flex flex-row justify-content-between">
+                                <p>Price: {{product.price}} €</p>
+                                <p>Time: {{product.productTime}} min</p>
+                            </div>
+
+                            <div class="mt-3 float-left">
+                                <h6>Product Description</h6>
+                                <p>{{product.description}}</p>
+                            </div>
+                            <div class="mt-3 float-left">
+                                <h6>Alérgenos</h6>
+                                {{product.allergies}}
+                            </div>
+
                          </div>
+                        
                          <div class="d-flex flex-row justify-content-end p-1 mt-2">
-                           <a href="/cart"><button class="btn btn-secondary mx-1">Add to Cart</button></a>
-                           <a href="/products/edit/{{product._id}}"><button class="btn btn-primary mx-1">Edit</button></a>
+                            <a href="/cart"><button class="btn btn-secondary mx-1 ">Add to Cart</button></a>
                          </div>
+                        
 
                     </div>
                 </div>
             </div>
+           
             {{/each}}
+
+
         </div>
     </div>
 </div>

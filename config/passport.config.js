@@ -18,20 +18,24 @@ passport.use('local-auth', new LocalStrategy({
   usernameField: 'email',
   passwordField: 'password'
 },(email, password, next) => {
-  
+    console.log('---PASSPORT-USE--- empieza la búsqueda de  usuario ')
   User.findOne({ email })
     .then(user => {  
+      console.log('---PASSPORT-USE--- encuentra usuario por mail para autentificacion local')
       if (!user) {
         next(null, null, { email: 'Invalid email or password'});
       } else {
+        console.log(' ---PASSPORT-USE--- encuentra para autentificacion local')
         return user.checkPassword(password)
           .then(match => {
             if (!match) {            
              next(null, null, { email: 'Invalid email or password1'});
             }else{ 
               if(user.verified && user.verified.date) {
+                console.log('---PASSPORT-USE--- encuentra usuario y verifica que existe')
                 next(null, user);
               } else {
+                ('---PASSPORT-USE--- encuentra usuario y pero este no ha verificado la cuenta todavía')
                 next(null, null, { email: 'Your account is not validated jet, please check your email' });
               }
             }
