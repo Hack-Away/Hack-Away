@@ -3,6 +3,7 @@ const Product = require('../models/product.model');
 const User = require('../models/user.model')
 require('../config/hbs.config');
 const qs = require('qs')
+const Comment = require('../models/comment.model')
 
 module.exports.register = (req,res,next) => {
     res.render('products/new')
@@ -22,7 +23,6 @@ module.exports.createProduct = (req, res, next) => {
 
     req.body.createdBy = res.locals.sessionUser.name;
 
- 
     const sessionUser = res.locals.sessionUser
 
     Product.create(req.body)
@@ -95,9 +95,7 @@ module.exports.list = (req, res, next ) => {
         });
     };
     
-    
     const { id } = req.params;
-    console.log('--- PRODUCT CONTROLLER ---', id)
 
     User.findById(id)
         .then(user => {
@@ -162,11 +160,19 @@ module.exports.detail = (req, res, next) => {
     
     Product.findById(id)
         .then(product => {
-            console.log('--- PRODUCT CONTROLLER ---', product)
-            res.render('products/detail', {
-                product:product,
-                sessionUser: sessionUser
-            })
+            Comment.find({idProduct: id})
+                .then(comments => {
+                    res.render('products/detail', {
+                        product: product,
+                        comments:comments,
+                        sessionUser: sessionUser
+                    })
+                })
+                .catch(error => {
+                    console.errors(error)
+                    next()
+                })
+         
         })
         .catch(error => {
             renderWithErrors(error)
@@ -189,7 +195,6 @@ module.exports.filter = (req, res, next) => {
     Product.find(filter)
             .sort(sortBy)
             .then(products => {
-                console.log('---FILTER--- encuentra productos', products)
                 res.render('products/filter', { products })
             })
             .catch(error => { 

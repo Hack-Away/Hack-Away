@@ -35,3 +35,16 @@ hbs.registerHelper('userAdmin', (id, sessionUser) => {
         return 'd-none'
     }
 })
+
+hbs.registerHelper('separateWords', (array) => {
+   
+    const arraySep = array
+
+    let wordsSep = ''
+    
+    for (let word of arraySep){
+        wordsSep += word + ', '
+    }
+    
+    return wordsSep
+})
