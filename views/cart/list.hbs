@@ -2,3 +2,49 @@
     <p>Vista de Pedido</p>
     <p>En Construcción</p>
 </div>
+
+
+{{# if products}}
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div class="list-group">
+                {{#each order as |product| }}
+                    <div class="list-group-item border">
+                        <strong>{{ product.name }}</strong>
+                        <span class="badge price-cart"> {{ products.price }} €</span>
+                        <div class="btn-group">
+                    
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="{{ product.qty }}">Remove one</a>
+                                <a class="dropdown-item" href="/cart{{ totalItems }}">Ad</a>
+                            </div>
+                        </div>
+                        <span class="total">{{ totalItems }}</span>
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <strong>Total: {{ totalPrice }}</strong>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <a href="/checkout" class="btn btn-raised  btn-success">Checkout</a>
+        </div>
+    </div>
+{{else}}
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4 main">
+            <h2>No items in Cart</h2>
+        </div>
+    </div>
+{{/if}}
+

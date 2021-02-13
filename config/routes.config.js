@@ -34,6 +34,7 @@ router.get('/products/list/:id', productController.list)
 router.get('/products/delete/:id', secure.isAuthenticated, productController.delete)
 router.get('/products/detail/:id', productController.detail)
 
-router.get('/cart', secure.isAuthenticated, cartController.cart);
+
+router.get('/cart/:id',secure.isAuthenticated, cartController.add);
 
 module.exports = router;
