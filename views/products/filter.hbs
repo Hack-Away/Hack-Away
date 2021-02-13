@@ -1,0 +1,58 @@
+
+<h1 class="text-center py-4">Buscador de productos</h1>
+
+<div class="bg-secondary rounded p-2 m-2">
+    <form action="/products/filter" method="get" class="d-flex flex-row justify-content-around">
+      
+        <input type="text" placeholder="Search..." class="form-control m-1" name="filter.name" value={{Search}}>
+                
+        <!--
+        <select name="kitchen" class="form-control m-1">
+            <option value="">> Filter by Kitchen</option>
+            <option value="Mediterranean">Mediterranean</option>
+            <option value="Chinese">Chinese</option>
+            <option value="Mexican">Mexican</option>
+            <option value="Arabic">Arabic</option>
+            <option value="Indian">Indian</option>
+            <option value="Italian">Italian</option>
+        </select>
+        -->
+        <select name="sort.rating" class="form-control m-1">
+            <option value="best" selected >Best Valuated</option>
+            <option value="worst">Worst Valuated</option>
+        </select>
+
+
+        <select name="sort.price" class="form-control m-1">
+            <option value="cheaper" selected>Cheaper</option>
+            <option value="expensive" >Expensive</option>
+        </select>
+      
+
+        <!--
+        <select name="sort.productTime" class="form-control m-1">
+            <option value="fast" selected>Fast</option>
+            <option value="slow">Slow</option>
+        </select>
+        -->
+        
+        <button type="submit" class="btn btn-dark">Search</button>
+ 
+    </form>
+</div>
+<div class="row bg-dark py-2 my-2">
+    <div class="row  mx-auto">
+        {{#each products as |product|}}
+        <a href="/products/detail/{{product.id}}" class="col-xs-12 col-md-4  text-decoration-none col-lg-3 p-1  justify-content-center px-3">
+            <div class="d-flex flex-column align-items-center m1 bg-secondary rounded h-100">
+                <h6 class="text-center text-decoration-none text-dark pt-2">{{product.name}}</h6>
+                <p class="text-white text-decoration-none">{{product.createdBy}}</p>    
+                <div class="d-flex justify-content-around">
+                    <p class="bg-warning rounded mx-1 p-1 px-2 text-decoration-none text-dark"><strong>{{product.price}}€</strong></p>
+                    <p class="bg-light rounded mx-1 p-1 px-2 text-decoration-none text-dark"><i class="fa fa-star color-warning" aria-hidden="true"></i>{{product.rating}}</p>
+                </div>   
+            </div>
+        </a>
+        {{/each}}
+    </div>
+</div>

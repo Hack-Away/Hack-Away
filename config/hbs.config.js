@@ -29,9 +29,22 @@ hbs.registerHelper('userRole', (role) => {
 })
 
 hbs.registerHelper('userAdmin', (id, sessionUser) => {
-    if (id === sessionUser.id){
+    if (id === sessionUser.id || id === sessionUser.name){
         return ''
     } else {
         return 'd-none'
     }
+})
+
+hbs.registerHelper('separateWords', (array) => {
+   
+    const arraySep = array
+
+    let wordsSep = ''
+    
+    for (let word of arraySep){
+        wordsSep += word + ', '
+    }
+    
+    return wordsSep
 })

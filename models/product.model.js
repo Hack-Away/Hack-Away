@@ -30,7 +30,12 @@ const productSchema = new Schema({
     createdBy:{
         type:String,
         required: true,
-      
+    },
+    rating: {
+        type:Number,
+        required:true,
+        default: 5,
+
     }
 
 }, {timestamps:true});

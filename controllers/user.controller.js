@@ -144,7 +144,7 @@ module.exports.profile = (req,res,next) => {
   User.findById(id)
       .then(user => {
         if (user){
-          Product.find({ createdBy: user.id })
+          Product.find({ createdBy: user.name })
             .then(products => {
                 const productsLimit = products.slice(0, 3)
                 res.render('users/profile', {

@@ -10,7 +10,7 @@ require('./config/passport.config')
 const morgan = require('morgan');
 const User = require('./models/user.model');
 
-app.use(bodyParser.urlencoded({ extended: false })); 
+app.use(bodyParser.urlencoded({ extended: true })); 
 
 app.use(morgan('dev'));
 // base de datos
@@ -31,6 +31,8 @@ res.locals.path = req.path;
 res.locals.sessionUser = req.user;
 next();
 });
+
+
 
 /*
 app.use((req, res, next) => {
