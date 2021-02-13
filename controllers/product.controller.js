@@ -157,7 +157,6 @@ module.exports.detail = (req, res, next) => {
     
     const sessionUser = res.locals.sessionUser;
 
-    
     Product.findById(id)
         .then(product => {
             Comment.find({idProduct: id})
@@ -172,12 +171,10 @@ module.exports.detail = (req, res, next) => {
                     console.errors(error)
                     next()
                 })
-         
         })
         .catch(error => {
             renderWithErrors(error)
         }) 
-    
 }
 
 module.exports.filter = (req, res, next) => {
@@ -187,9 +184,12 @@ module.exports.filter = (req, res, next) => {
     if (filter.name) filter.name = new RegExp(filter.name, 'i')
     else delete filter.name
 
+    console.log(sort)
+
     const sortBy = {
-        price: sort.price === 'cheaper' ? -1 : 1,
-        productTime: sort.time === 'fast' ? -1 : 1 
+        price: sort.price === 'cheaper' ? 1 : -1,
+        productTime: sort.time === 'fast' ? 1 : -1,
+        rating: sort.rating === "best" ? -1 : 1
     }   
     
     Product.find(filter)

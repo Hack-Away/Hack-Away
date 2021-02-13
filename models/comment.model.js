@@ -20,6 +20,10 @@ const commentSchema = ({
         type:Number,
         required: 'Rate is required',
         enum:[1,2,3,4,5]
+    }, 
+    createdBy:{
+        type:String,
+        required: true
     }
 });
 

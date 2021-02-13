@@ -18,15 +18,16 @@
         </select>
         -->
         <select name="sort.rating" class="form-control m-1">
-            <option value="worst" selected >Best Valuated</option>
-            <option value="best">Worst Valuated</option>
+            <option value="best" selected >Best Valuated</option>
+            <option value="worst">Worst Valuated</option>
         </select>
 
 
         <select name="sort.price" class="form-control m-1">
-            <option value="expensive" selected>Cheaper</option>
-            <option value="cheaper" >Expensive</option>
+            <option value="cheaper" selected>Cheaper</option>
+            <option value="expensive" >Expensive</option>
         </select>
+      
 
         <!--
         <select name="sort.productTime" class="form-control m-1">
@@ -35,22 +36,21 @@
         </select>
         -->
         
-        <button type="submit" class="btn btn-primary">Search</button>
+        <button type="submit" class="btn btn-dark">Search</button>
  
     </form>
 </div>
 <div class="row bg-dark py-2 my-2">
-    <div class="row w-75 mx-auto">
+    <div class="row  mx-auto">
         {{#each products as |product|}}
-        <a href="/products/detail/{{product.id}}" class="col-xs-12 col-md-4  text-decoration-none col-lg-3 p-1  justify-content-center  px-3">
-            <div class="d-flex flex-column align-items-center m1 bg-secondary rounded">
+        <a href="/products/detail/{{product.id}}" class="col-xs-12 col-md-4  text-decoration-none col-lg-3 p-1  justify-content-center px-3">
+            <div class="d-flex flex-column align-items-center m1 bg-secondary rounded h-100">
                 <h6 class="text-center text-decoration-none text-dark pt-2">{{product.name}}</h6>
                 <p class="text-white text-decoration-none">{{product.createdBy}}</p>    
                 <div class="d-flex justify-content-around">
                     <p class="bg-warning rounded mx-1 p-1 px-2 text-decoration-none text-dark"><strong>{{product.price}}€</strong></p>
                     <p class="bg-light rounded mx-1 p-1 px-2 text-decoration-none text-dark"><i class="fa fa-star color-warning" aria-hidden="true"></i>{{product.rating}}</p>
                 </div>   
-
             </div>
         </a>
         {{/each}}
