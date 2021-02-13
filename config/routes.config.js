@@ -43,8 +43,10 @@ router.get('/products/detail/:id', productController.detail)
 router.get('/products/filter', productController.filter)
 
 
-//RUTAS CART
-router.get('/cart', secure.isAuthenticated, cartController.cart);
+
+
+router.get('/cart/:id',secure.isAuthenticated, cartController.add);
+
 
 //RUTAS COMMENTS
 router.get('/comments/new/:id', secure.isAuthenticated, commentController.new)
