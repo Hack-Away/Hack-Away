@@ -1,5 +1,34 @@
-<h1>pedido</h1>
+<form  method="Post" action="/cart/create">
+    <div>
+        <h1 class="text-center my-4">Order Confirmation </h1>
+    </div>
 
-<div>
-    
-</div>
+    <div>
+        <div class="card d-flex flex-row justify-content-around m-2 p-2 bg-dark">
+                <h5 class="text-white">Product</h5>
+                <h5 class="text-white">Quantity</h5>
+                <h5 class="text-white">Price(Ud)</h5>
+                <h5 class="text-white">Total</h5>  
+        </div>
+    </div> 
+    <div>
+        {{#if order}}
+        {{order.name}}
+        {{order.product}}{{order.productList}}
+        {{/if}}
+        {{#each order as |product|}} 
+            <h5>{{product.name}}</h5>
+            <h5>{{product.qty}}</h5>
+            <h5>{{product.price}}</h5>
+        {{/each}}
+    </div> 
+    <div class="card d-flex flex-row  align-items-center justify-content-end m-2  p-2 bg-secondary">
+        <h5 class="mx-1 text-white">Objetos totales: {{totalItems}} </h5>
+        <h5 class="mx-1 text-white">Precio total: {{totalPrice}} €</h5>
+    </div>
+
+    <div class="d-flex flex-row m-2 justify-content-end">
+         <button class="btn btn-dark" type="submit">Make your payment</button> 
+    </div>
+
+</form>

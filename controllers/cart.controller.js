@@ -38,15 +38,31 @@ module.exports.add = (req, res, next) => {
 }
 
 module.exports.create = (req, res, next) => {
-    let {order} = req.body
-    console.log(order)
-    console.log(req.body)
-    Cart.create(order)
-        .then(order => {
-            res.render('cart/order');
-        })
-        .catch(error => {
-            console.log('Error al crear contenido de cesta',error);
-            next(error)
-        })
+            
+            let {order} = req.body 
+            let product= {
+                    price : req.body.price,
+                    qty : req.body.qty,
+                    name: req.body.name
+                }   
+            
+            order = {
+                productList: [],
+                createdBy: req.body.createdBy
+                
+            }
+            order.productList.push(product);
+            console.log(order.productList)
+            let products = order.productList
+            Cart.create(order)
+                .then(order => {
+                    res.render('cart/order', {order: products});
+                })
+                .catch(error => {
+                    console.log('Error al crear contenido de cesta',error);
+                    next(error)
+                })
+        
+       
+   
 }

@@ -1,4 +1,5 @@
 
+
 <form  method="Post" action="/cart/create">
     <div>
         <h1 class="text-center my-4">Vista de Carrito</h1>
@@ -20,12 +21,12 @@
         {{#each order as |product|}} 
             <div class="card d-flex flex-row justify-content-around m-2 p-2">
                 <div class="d-flex flex-column ">
-                    <input type="text" name="name" value="{{product.name}}" >
-                    <input type="text" name="createdBy" value="{{product.createdBy}}" >
+                    <input  type="text" name="name" value="{{product.name}}" >
+                    <input  type="text" name="createdBy" value="{{product.createdBy}}" >
                 </div>
                 <input type="number" name="qty" value="{{product.qty}}">
-                <input type="number" name="price" value="{{product.price}}" >
-                <input type="number" name="total" value="{{product.total}}" >
+                <input class="no-spinners" type="number" name="price" value="{{product.price}}" >
+                <input class="no-spinners" type="number" name="total" value="{{product.total}}" >
             </div>
         {{/each}}
     </div> 
