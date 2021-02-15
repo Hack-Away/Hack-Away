@@ -1,50 +1,42 @@
-<div>
-    <p>Vista de Pedido</p>
-    <p>En Construcción</p>
-</div>
 
+<form  method="Post" action="/cart/create">
+    <div>
+        <h1 class="text-center my-4">Vista de Carrito</h1>
+    </div>
 
-{{# if products}}
-    <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
-            <div class="list-group">
-                {{#each order as |product| }}
-                    <div class="list-group-item border">
-                        <strong>{{ product.name }}</strong>
-                        <span class="badge price-cart"> {{ products.price }} €</span>
-                        <div class="btn-group">
-                    
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="{{ product.qty }}">Remove one</a>
-                                <a class="dropdown-item" href="/cart{{ totalItems }}">Ad</a>
-                            </div>
-                        </div>
-                        <span class="total">{{ totalItems }}</span>
-                    </div>
-                {{/each}}
+    <div class="d-flex flex-row m-2 justify-content-end">
+         <button class="btn btn-dark" type="submit">Continúa tu compra</button> 
+    </div>
+
+    <div>
+        <div class="card d-flex flex-row justify-content-around m-2 p-2 bg-dark">
+                <h5 class="text-white">Product</h5>
+                <h5 class="text-white">Quantity</h5>
+                <h5 class="text-white">Price(Ud)</h5>
+                <h5 class="text-white">Total</h5>  
+        </div>
+    </div> 
+    <div>
+        {{#each order as |product|}} 
+            <div class="card d-flex flex-row justify-content-around m-2 p-2">
+                <div class="d-flex flex-column ">
+                    <input type="text" name="name" value="{{product.name}}" >
+                    <input type="text" name="createdBy" value="{{product.createdBy}}" >
+                </div>
+                <input type="number" name="qty" value="{{product.qty}}">
+                <input type="number" name="price" value="{{product.price}}" >
+                <input type="number" name="total" value="{{product.total}}" >
             </div>
-        </div>
+        {{/each}}
+    </div> 
+    <div class="card d-flex flex-row  align-items-center justify-content-end m-2  p-2 bg-secondary">
+        <h5 class="mx-1 text-white">Objetos totales: {{totalItems}} </h5>
+        <h5 class="mx-1 text-white">Precio total: {{totalPrice}} €</h5>
     </div>
-    <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
-            <strong>Total: {{ totalPrice }}</strong>
-        </div>
+
+    <div class="d-flex flex-row m-2 justify-content-end">
+         <button class="btn btn-dark" type="submit">Comprar</button> 
     </div>
-    <hr>
-    <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
-            <a href="/checkout" class="btn btn-raised  btn-success">Checkout</a>
-        </div>
-    </div>
-{{else}}
-    <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-4 main">
-            <h2>No items in Cart</h2>
-        </div>
-    </div>
-{{/if}}
+
+</form>
 

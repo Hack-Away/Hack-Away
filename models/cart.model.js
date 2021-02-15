@@ -2,48 +2,37 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const cartSchema = new Schema({
-    'restaurant.id':{
+    createdBy:{
         type: String, 
         required: true
     },
     productList:[{
-                required:true,
-                'product.id':{
-                            type:String,
-                            require:true
-                            },
-                'product.qty': {
-                             type:Number,
-                             required:true
-                            },
-                             product :{
-                                    price:{
-                                         type:Number,
-                                         required: 'Price is mandatory'
-                                    },
-                                    qty: {
-                                        type:Number,
-                                        required:true
-                                    }
-        }
-        /*
-        'product.price':{
-        type: Number,
-           required:true
-       
-    }
- */
-        }],
+        product:{
+            price:{
+                type: Number,
+                required: true
+            },
+            qty:{
+                type:Number,
+                required: true
+            },
+            id:{
+                type: String,
+                required:true
+            }
+        },     
+ 
+    }],
     message:{
         type:String
     },
     stateMachine:{
-        type: String,
-        required: true,  
-        default:['no valido'],
+        type: String, 
+        default:'no-valido',
         enum : ['no-valido','procesado','comprado','expirado'],
         required:true
     }  
 }, {timestamps:true});
 
-module.exports = mongoose.model('Order', schema);
+const Order = mongoose.model('Order', cartSchema);
+module.exports = Order
