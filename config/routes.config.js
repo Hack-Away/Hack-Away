@@ -44,8 +44,9 @@ router.get('/products/filter', productController.filter)
 
 
 
-
-router.get('/cart/:id',secure.isAuthenticated, cartController.add);
+//RUTAS CART
+router.get('/cart/:id', cartController.add);
+router.post('/cart/create', cartController.create);
 
 
 //RUTAS COMMENTS
