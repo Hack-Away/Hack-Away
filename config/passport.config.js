@@ -26,12 +26,12 @@ passport.use('local-auth', new LocalStrategy({
         return user.checkPassword(password)
           .then(match => {
             if (!match) {            
-             next(null, null, { email: 'Invalid email or password1'});
+             next(null, null, { email: 'Invalid email or password'});
             }else{ 
               if(user.verified && user.verified.date) {
                 next(null, user);
               } else {
-                ('---PASSPORT-USE--- encuentra usuario y pero este no ha verificado la cuenta todavía')
+                ('---PASSPORT-USE--- Encuentra usuario y pero este no ha verificado la cuenta todavía')
                 next(null, null, { email: 'Your account is not validated jet, please check your email' });
               }
             }
@@ -50,7 +50,8 @@ passport.use('google-auth', new GoogleStrategy({
     const googleId = profile.id;
     const name = profile.displayName;
     const email = profile.emails[0] ? profile.emails[0].value : undefined;
-    
+    const avatar = (profile.photos && profile.photos[0]) ? profile.photos[0].value : undefined;
+
 
     if (googleId && name && email) {
       User.findOne({ $or: [
@@ -69,7 +70,8 @@ passport.use('google-auth', new GoogleStrategy({
               verified: {
                 date: new Date(),
                 token: null
-              }
+              },
+              avatar
             });
             return user.save()
               .then(user => next(null, user))

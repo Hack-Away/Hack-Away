@@ -18,17 +18,22 @@ module.exports.createProduct = (req, res, next) => {
             errors: errors
         });
     };
-
     
+    const product = req.body;
+    product.createdBy = res.locals.sessionUser.name;
 
-    req.body.createdBy = res.locals.sessionUser.name;
-
+    if(req.file){
+        product.avatarProd= req.file.path;
+    }
     const sessionUser = res.locals.sessionUser
 
-    Product.create(req.body)
+    console.log(req.file);
+    
+    Product.create(product)
         .then(product => {
             if (product){
-                console.log('crea el producto')
+                
+                console.log('crea el producto', product)
                 res.redirect(`../users/profile/${sessionUser.id}`)
             } else {
                 console.log('no crea el producto porque no existe')

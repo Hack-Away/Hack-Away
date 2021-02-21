@@ -67,6 +67,12 @@ const userSchema = new Schema({
             Math.random().toString(36).substr(2)
         }
     },
+    avatar:{
+        type: String,
+        default: function() {
+            return `https://i.pravatar.cc//150?u=${this.id}`
+        }
+    },
     description: {
         type: String,
         default: 'A few words about your restaurant...'

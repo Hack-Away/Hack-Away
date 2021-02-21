@@ -6,26 +6,40 @@
 
         <div class="form-group mb-3">
             <label for="email">Email address</label>
-            <input type="email" name="email" class="form-control {{#if errors.user}}is-invalid{{/if}}"
+            <input type="email" name="email" class="form-control {{#if errors.email}}is-invalid{{/if}}"
                 placeholder="Enter email" value="{{user.email}}">
-            {{#if errors.user}}<div class="invalid-feedback">{{errors.user}} </div>{{/if}}
-        </div>
-
-        
+            {{#if errors.email  }}<div class="invalid-feedback">{{errors.message}}</div>{{/if}}
+         {{#if verification}}
+      <div class="alert alert-warning" role="alert">
+        Please verify your email account.
+      </div>
+    {{/if}}
+    </div>     
     
-{{#if errors.email}}
-    <div class="alert alert-danger" role="alert">
+    {{#if errors.email}}
+        <div class="alert alert-danger" role="alert">
         {{errors.email}}
-    </div>
-{{/if}}
+        </div>
+    {{/if}}
+    {{#if errors.message}}
+        <div class="alert alert-danger" role="alert" class="invalid-feedback">
+            {{errors.message}}
+        </div>
+    {{/if}}
 
         <div class="form-group">
                 <label for="exampleInputPassword1">Password</label>
-                <input type="password" name="password" class="form-control {{#if errors.password}}is-invalid{{/if}}"
+                <input type="password" name="password" class="form-control {{#if errors.email}}is-invalid{{/if}}"
                     id="exampleInputPassword1" placeholder="Password">
-                    {{#if errors.password}}<div class="invalid-feedback">{{errors.password}}</div>{{/if}}
+                    {{#if errors.email}}<div class="invalid-feedback">{{errors.email}}</div>{{/if}}
         </div>
         
+    {{#if errors.email}}
+            <div class="alert alert-danger" role="alert">
+    {{errors.email}}
+        </div>
+    {{/if}}
+
 
         <div class="row mt-3 justify-content-center">
             <button type="submit" class="btn btn-dark col-sx-12 col-md-3 m-1">Log In</button>

@@ -23,13 +23,16 @@ module.exports.doRegister = (req, res, next) => {
     });
   };
 
+  
+  console.log(req.file);
+
   User.findOne({email:req.body.email, 'verified.date': { $ne: null } })
   .then(user => {
     
     if (user) {
       renderWithErrors({emailRegister:'Invalid email or password'})
     } else {
-       
+
        return User.create(req.body)
         .then((user) => {
           console.log('--- USER CONTROLLER --- Crea un usuario nuevo y lo registra en la base de datos')
@@ -64,14 +67,17 @@ module.exports.login = (req, res, next) => {
 module.exports.doLogin = (req, res, next) => {
 
   function renderWithErrors(errors) {
+    console.log(errors);
 
     res.status(400).render('users/login', {
-      user: req.body,
-      errors: errors
+
+      user:req.body,
+      errors:errors
     });
   };
 
   passport.authenticate('local-auth', (error, user, validations) => {
+   
     if(error){
       next(error);
     } else if (user){
@@ -80,14 +86,16 @@ module.exports.doLogin = (req, res, next) => {
         console.log(res.locals)
         console.log(user)
           if(error) next(error)
-          //revisar ruta
+          
           else res.redirect('/');
       });
     } else{
       res.render('users/login', {user: req.body, errors: validations});
     }
-
+    
+   
   })(req, res, next);
+  
 };
 
 
@@ -187,8 +195,14 @@ module.exports.doEdit = (req,res,next) => {
 
     let { id } = req.params
    
+    let newUser = req.body
 
-    User.findByIdAndUpdate(id, {$set: req.body})
+    if(req.file){
+      newUser.avatar= req.file.path;
+    }
+    //console.log('aqui',newUser);
+
+    User.findByIdAndUpdate(id, {$set: newUser})
       .then(user => {
       
         res.redirect(`../../users/profile/${user.id}`)
@@ -221,3 +235,4 @@ module.exports.delete = (req,res,next) => {
         renderWithErrors(error)
       })
 }
+
