@@ -34,7 +34,7 @@
                     {{#each users as |userList|}} <!--  ahora mismo está buscando por producto, aqui deberían venir una lista de restaurantes -->
                     <a href="/users/profile/{{userList.id}}" class="text-decoration-none text-dark">
                          <div class="card m-1 p-3 d-flex flex-row align-items-around">
-                             <img src="{{user.avatar}}" alt="" class="bg-secondary" style="width: 100px; height:100px">
+                             <img src="{{userList.avatar}}" alt="" class="bg-secondary" style="width: 100px; height:100px">
                              <div class="px-3">
                                  <div class="d-flex flex-row justify-content-between">
                                      <p><strong>{{userList.name}}</strong></p>
