@@ -4,7 +4,6 @@ const Product = require('../models/product.model')
 const User = require('../models/user.model')
 
 module.exports.home = (req, res, next) => {
-
     Product.find()
         .then(products => {
             if (products) {

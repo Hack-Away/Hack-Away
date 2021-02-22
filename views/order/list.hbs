@@ -1,0 +1,76 @@
+<div>
+    <div class="d-flex flex-row justify-content-between align-items-center mx-3">
+        <h1 class="text-center my-4">Shopping Cart</h1>
+        <a href="/order/delete/{{order.id}}"><button class="bnt btn-danger rounded p-1 px-2">Delete Order</button></a>  
+        
+    </div>
+    <div class="d-flex flex-row justify-content-around mx-3">
+        <h6>Order by: {{order.createdBy.name}}</h6>
+        <h6>Order nº: {{order.id}}</h6>
+        <h6>Order State: {{order.state}}</h6>
+    </div>
+    
+    <div>
+        <div class="card d-flex flex-row justify-content-around m-2 p-2 bg-dark">
+            <div class="col-1"></div>
+            <h6 class="text-white col-5">Product</h6>
+            <h6 class="text-white text-center col-2">Quantity</h6>
+            <h6 class="text-white text-center col-2">Price(Ud)</h6>
+            <h6 class="text-white text-center col-2">Total</h6>
+        </div>
+    </div> 
+    <div>
+        
+        {{#each productList as |product|}}
+            <div class="card d-flex flex-row justify-content-around m-2 p-2">
+            
+                <div class="d-flex flex-row align-items-center col-1">
+                    <a href="/order/update/delete/{{product.id}}"><button class="btn btn-danger mx-3 p-1 px-2">x</button></a>
+                </div>
+                <div class="d-flex flex-column justify-content-start col-5 mx-2 ">
+                    <h6 class="d-flex flex-row my-auto">{{indexPlus @index}} - {{product.product.name}}</h6>
+                    <span class="text-secondary">{{product.product.createdBy}}</span>
+                </div>
+                <div class="d-flex flex-row justify-content-center align-items-center col-2 ">
+                    <a href="/order/update/rest/{{product.id}}"><button class="btn btn-warning mx-3 px-2 py-1 ">-</button></a>
+                    <h4 name="qty" class="mx-1">{{product.qty}}</h4>
+                    <a href="/order/update/add/{{product.id}}"><button class="btn btn-warning mx-3 p-1">+</button></a>
+                  
+                </div>
+                <div class="d-flex flex-row justify-content-center align-items-center col-2">
+                    {{product.product.price}}
+                </div>
+                <div class="d-flex flex-row justify-content-center align-items-center col-2">
+                    {{totalPriceProduct product}}
+                </div>
+
+            </div>
+        {{/each}}
+       
+        {{#unless productList}}
+            <div class="p-5 bg-light mx-2 rounded">
+                <h3 class="text-center text-secondary mb-4">Parece que tienes el carrito vacío...</h3>
+                <a href="/products/filter" class="d-flex flex-row justify-content-center text-decoration-none">
+                    <button class="btn btn-warning ">Buscador de Productos</button>
+                </a>
+            </div>
+        {{/unless}}
+        
+       
+  
+    </div> 
+    <div class="card d-flex flex-row  align-items-center justify-content-end m-2  p-2 bg-secondary">
+        <h5 class="mx-1 text-white">Objetos totales: {{totalItemsOrder productList}} </h5>
+        <h5 class="mx-1 text-white">Precio total: {{totalItemsPrice productList}} €</h5>
+    </div>
+    <div class="row">
+        <div class="d-flex flex-row m-2 justify-content-center">
+            <a href="/products/filter"><button class="btn btn-dark mx-1">Continúa tu compra</button></a>
+            <a href="/order/confirm/{{order.id}}"><button class="btn btn-dark mx-1">Buy Now</button></a>
+            <!--{{buttonBuy order}}-->
+        </div>
+        <div class="d-flex flex-row m-2 justify-content-end">
+           
+        </div>
+    </div>
+</div>

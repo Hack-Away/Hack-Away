@@ -1,0 +1,67 @@
+<div class="m-1">
+    <div class="text-center my-3 mb-4">
+        <h1>Confirm your order</h1>
+    </div>
+    <div class="d-flex flex-row justify-content-around mx-3">
+        <h6>Order by: {{order.createdBy.name}}</h6>
+        <h6>Order nº: {{order.id}}</h6>
+        <h6>Order State: {{order.state}}</h6>
+    </div>
+
+    <div>
+        <div class="card d-flex flex-row justify-content-around m-2 p-2 bg-dark">
+            <div class="col-1"></div>
+            <h6 class="text-white col-5">Product</h6>
+            <h6 class="text-white text-center col-2">Quantity</h6>
+            <h6 class="text-white text-center col-2">Price(Ud)</h6>
+            <h6 class="text-white text-center col-2">Total</h6>
+        </div>
+    </div>
+
+    {{#each productList as |product|}}
+
+
+    <div class="card d-flex flex-row justify-content-around m-2 p-2">
+        
+        <div class="d-flex flex-column justify-content-start col-5 mx-2 ">
+            <h6 class="d-flex flex-row my-auto">{{indexPlus @index}} - {{product.product.name}}</h6>
+            <span class="text-secondary">{{product.product.createdBy}}</span>
+        </div>
+        <div class="d-flex flex-row justify-content-center align-items-center col-2 ">
+            
+            <h4 name="qty" class="mx-1">{{product.qty}}</h4>
+
+        </div>
+        <div class="d-flex flex-row justify-content-center align-items-center col-2">
+            {{product.product.price}}
+        </div>
+        <div class="d-flex flex-row justify-content-center align-items-center col-2">
+            {{totalPriceProduct product}}
+        </div>
+
+    </div>
+    {{/each}}
+
+    {{#unless productList}}
+    <div class="p-5 bg-light mx-2 rounded">
+        <h3 class="text-center text-secondary mb-4">Parece que tienes el carrito vacío...</h3>
+        <a href="/products/filter" class="d-flex flex-row justify-content-center text-decoration-none">
+            <button class="btn btn-warning ">Buscador de Productos</button>
+        </a>
+    </div>
+    {{/unless}}
+
+    <div class="card d-flex flex-row  align-items-center justify-content-end m-2  p-2 bg-secondary">
+        <h5 class="mx-1 text-white">Objetos totales: {{totalItemsOrder productList}} </h5>
+        <h5 class="mx-1 text-white">Precio total: {{totalItemsPrice productList}} €</h5>
+    </div>
+    <div class="d-flex flex-row justify-content-center mx-3">
+        <form action="/order/confirm/{{order.id}}" method="POST">
+            <h6>Add any comment to the Restaurant</h6>
+            <textarea name="message" cols="50" rows="2"></textarea>
+            <div class="d-flex flex-row justify-content-center mb-3">
+                <button class="btn btn-dark">Confirm Order</button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,62 @@
+
+<div>
+    <div class="d-flex flex-column justify-content-center mx-3 mt-4">
+        <h1 class="text-center">Order Confirmation</h1>
+        <div class="d-flex flex-row mx-5">
+            <h5 class="text-center col-sx-12 col-md-8 p-2 bg-success m-1 card py-3 text-white"> Your order has been sended!</h5>
+            <h6 class="col-sx-12 col-md-3 card bg-secondary  m-1 p-3 text-center text-white border-dark">Estimated Time:  {{estimatedTime order}} minutes</h6>
+            
+        </div>
+    </div>
+    <div class="d-flex flex-row justify-content-around mx-3 my-4">
+        <h6 class="col-3 text-center">Order by: {{order.createdBy.name}}</h6>
+        <h6 class="col-3 text-center">Order nº: {{order.id}}</h6>
+        <h6 class="col-3 text-center">Order State: {{order.state}}</h6>   
+    </div>
+
+    
+
+<div class="card d-flex flex-column justify-content-center m-2 p-2 mx-3 bg-secondary text-white">
+    <div>
+        <div class="card d-flex flex-row justify-content-around m-2 p-2 bg-dark">
+            <div class="col-1"></div>
+            <h6 class="text-white col-5">Product</h6>
+            <h6 class="text-white text-center col-2">Quantity</h6>
+            <h6 class="text-white text-center col-2">Price</h6>
+            <h6 class="text-white text-center col-2">Total</h6>
+        </div>
+    </div>
+    {{#each productList as |product|}}
+    <div class=" d-flex flex-row justify-content-around m-2 p-2">
+    
+      <div class="col-1"></div>
+        <div class="d-flex flex-column justify-content-start col-5 mx-2 ">
+            <h6 class="d-flex flex-row my-auto">{{indexPlus @index}} - {{product.product.name}}</h6>
+            <span class="text-dark">{{product.product.createdBy}}</span>
+        </div>
+        <div class="d-flex flex-row justify-content-center align-items-center col-2 ">
+           
+            <h4 name="qty" class="mx-1">{{product.qty}}</h4>
+          
+        </div>
+        <div class="d-flex flex-row justify-content-center align-items-center col-2">
+            {{product.product.price}}
+        </div>
+        <div class="d-flex flex-row justify-content-center align-items-center col-2">
+            {{totalPriceProduct product}}
+        </div>
+    
+    </div>
+    {{/each}}
+
+    <div class="card d-flex flex-row align-items-center justify-content-end m-2  p-2 bg-dark">
+        <h5 class="mx-1 text-white">Objetos totales: {{totalItemsOrder productList}} </h5>
+        <h5 class="mx-1 text-white">Precio total: {{totalItemsPrice productList}} €</h5>
+    </div>
+    <div class="card d-flex flex-column align-items-start justify-content-start m-2 p-2 bg-light text-dark">
+        <h6>Comments for the Restaurant:</h6>
+        <p>{{order.message}}</p>
+    </div>
+</div>
+
+</div>
