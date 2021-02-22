@@ -7,7 +7,7 @@
     "start": "node app.js",
     "dev": "nodemon -e hbs,js,css app.js",
     "dev-windows": "nodemon -e hbs,js,css app.js",
-    "seeds": "node bin/seeds.js"
+    "seeds": "node seeds/seeds.js"
   },
   "repository": {
     "type": "git",

@@ -3,32 +3,35 @@
 
     "name": "rest taurant",
     "role": "user",
-    "email":"",
+    "email":"restaurant@mail.com",
     "avatar":"https://res.cloudinary.com/dazypdtba/image/upload/v1613939648/public/uploads/leypsozitesolplpabdi.jpg",
     "img":"",
-    "favorites":"italian",
-    "kitchen":"italian",
-    "description":"Nuestro pequeño pero acogedor restaurante se encuentra ubicado en el el centro de la capital esquina con la calle pez siguiendo todas las normas que nos exijan estos tiempos mantenemos nuestro cercanía con los clientes!"
+    "favorites":"Italian",
+    "kitchen":"Italian",
+    "description":"Nuestro pequeño pero acogedor restaurante se encuentra ubicado en el el centro de la capital esquina con la calle pez siguiendo todas las normas que nos exijan estos tiempos mantenemos nuestro cercanía con los clientes!",
+    "password": 1234567890
     },
    {
     "name": "ironhacker Coding",
     "role": "admin",
-    "email":"",
+    "email":"mailironhacker@example.com",
     "avatar":"https://res.cloudinary.com/dazypdtba/image/upload/v1613917167/public/uploads/aoezohfiqbqr0oqtzbv8.jpg",
     "img":"",
     "favorites":"Mediterranean",
-    "kitchen":"italian",
-    "description":"Cuando no esta en Ironhack entre la clase de Carlos y julio aprovecha las resetas ancestrales de su familia para trabajar en su modesto puesto de repostería artesanal"
-    },
+    "kitchen":"Italian",
+    "description":"Cuando no esta en Ironhack entre la clase de Carlos y julio aprovecha las resetas ancestrales de su familia para trabajar en su modesto puesto de repostería artesanal",
+    "password":1234567890   
+},
    {
     "name": "restmexmex",
     "role": "user",
-    "email":"",
+    "email":"mail-restmex@example.com",
     "avatar":"https://res.cloudinary.com/dazypdtba/image/upload/v1613939325/public/uploads/uubz3du1dlhehxxqj8fu.jpg",
     "img":"",
     "favorites":"Mexican",
     "kitchen":"Mexican",
-    "description":"Desde la mismísima tierra de el mezcal y las playas paradisíacas , Frida y Diego este restaurante prepara comida mex mex con comida casera para las los paladares mas exigentes con un variedad de comida mexmex "
+    "description":"Desde la mismísima tierra de el mezcal y las playas paradisíacas , Frida y Diego este restaurante prepara comida mex mex con comida casera para las los paladares mas exigentes con un variedad de comida mexmex ",
+    "password":1234567890
 
     }
 
