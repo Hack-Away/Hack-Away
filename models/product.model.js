@@ -46,9 +46,6 @@ const productSchema = new Schema({
         type:String,
         default:"Point"
     },
-    coordinates:[Number]
-
-    },
     qty:{
         type:Number,
         default:1

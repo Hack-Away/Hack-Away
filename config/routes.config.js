@@ -13,6 +13,8 @@ const storage = require('./storage.config');
 
 // RUTAS COMUNES
 router.get('/', commonController.home)
+router.get('/about', commonController.about)
+router.get('/cookies', commonController.cookies)
 
 
 // RUTAS AUTENTIFICACIÓN
