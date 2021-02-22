@@ -44,7 +44,7 @@ passport.use('local-auth', new LocalStrategy({
 passport.use('google-auth', new GoogleStrategy({
   clientID: process.env.G_CLIENT_ID,
   clientSecret: process.env.G_CLIENT_SECRET,
-  callbackURL: process.env.G_REDIRECT_URI || '/authentication/google/cb/hack-away',
+  callbackURL: process.env.G_REDIRECT_URI || '/authentication/google/cb',
 }, (accessToken, refreshToken, profile, next) => {
    
     const googleId = profile.id;

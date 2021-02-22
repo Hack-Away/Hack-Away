@@ -17,13 +17,7 @@ const transport = nodemailer.createTransport({
 
 module.exports.sendValidationEmail = (email, activationToken, name) => {
 
-  let message = {
-    from: email,
-    to: user,
-    subject: 'test',
-    html: '<p>test de prueba</p>'
-
-  }
+  
   transport
     .sendMail(
      {
