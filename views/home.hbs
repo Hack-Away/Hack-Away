@@ -6,7 +6,7 @@
         </div>
     
     </div>
-
+                            
     <div>
         <div class="row bg-dark py-3">
             <div class="col-sm-12 col-md-6 ">
@@ -15,7 +15,7 @@
                     {{#each products as |product|}}
                     <a href="/products/detail/{{product.id}}" class="text-decoration-none text-dark">
                         <div class="card m-1 p-3 d-flex flex-row"> 
-                            <img src="{{product.image}}" alt="" class="bg-secondary" style="width: 100px; height:100px">
+                            <img src="{{product.avatarProd}}" alt="" class="bg-secondary" style="width: 100px; height:100px">
                             <div class="px-2 d-flex flex-column">
                                 <div class="d-flex flex-row justify-content-between">
                                     <p><strong>{{product.name}}</strong></p>
@@ -34,7 +34,7 @@
                     {{#each users as |userList|}} <!--  ahora mismo está buscando por producto, aqui deberían venir una lista de restaurantes -->
                     <a href="/users/profile/{{userList.id}}" class="text-decoration-none text-dark">
                          <div class="card m-1 p-3 d-flex flex-row align-items-around">
-                             <img src="" alt="" class="bg-secondary" style="width: 100px; height:100px">
+                             <img src="{{userList.avatar}}" alt="" class="bg-secondary" style="width: 100px; height:100px">
                              <div class="px-3">
                                  <div class="d-flex flex-row justify-content-between">
                                      <p><strong>{{userList.name}}</strong></p>

@@ -19,13 +19,22 @@ module.exports.createProduct = (req, res, next) => {
         });
     };
 
-    req.body.createdBy = res.locals.sessionUser.name;
+    
+   const product = req.body;
+    product.createdBy = res.locals.sessionUser.name;
+
+    if(req.file){
+        product.avatarProd= req.file.path;
+    }
 
     const sessionUser = res.locals.sessionUser
 
-    Product.create(req.body)
+    console.log(req.file);
+    
+    Product.create(product)
         .then(product => {
             if (product){
+
                 res.redirect(`../users/profile/${sessionUser.id}`)
             } else {
                 next()

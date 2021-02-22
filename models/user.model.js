@@ -47,12 +47,12 @@ const userSchema = new Schema({
     },
     kitchen:{
         type:String,
-        enum:['Mediterranean', 'Chinese', 'Mexican' ,'Arabic', 'Indian','italian'],
+        enum:['Mediterranean', 'Chinese', 'Mexican' ,'Arabic', 'Indian','Italian'],
         //required: 'The  is mandatory'
     },
     favorites:{
         type:String,
-        enum:['Mediterranean', 'Chinese', 'Mexican' ,'Arabic', 'Indian','italian']
+        enum:['Mediterranean', 'Chinese', 'Mexican' ,'Arabic', 'Indian','Italian']
             
     },
     verified: {
@@ -65,6 +65,12 @@ const userSchema = new Schema({
             Math.random().toString(36).substr(2)+
             Math.random().toString(36).substr(2)+
             Math.random().toString(36).substr(2)
+        }
+    },
+    avatar:{
+        type: String,
+        default: function() {
+            return `https://i.pravatar.cc//150?u=${this.id}`
         }
     },
     description: {

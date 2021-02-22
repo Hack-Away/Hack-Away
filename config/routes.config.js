@@ -9,6 +9,7 @@ const GOOGLE_OAUTH_SCOPES = ['https://www.googleapis.com/auth/userinfo.email', '
 const passport = require('passport');
 const commonController = require('../controllers/common.controller')
 const commentController = require('../controllers/comment.controller')
+const storage = require('./storage.config');
 
 // RUTAS COMUNES
 router.get('/', commonController.home)
@@ -28,14 +29,14 @@ router.post('/users/login', userController.doLogin);
 router.get('/users/profile/:id', userController.profile);
 router.get('/users/logout', secure.isAuthenticated, userController.logout);
 router.get('/users/edit/:id', secure.isAuthenticated, userController.edit)
-router.post('/users/edit/:id', secure.isAuthenticated, userController.doEdit)
+router.post('/users/edit/:id', secure.isAuthenticated, storage.single('image'),userController.doEdit)
 router.get('/users/delete/:id', secure.isAuthenticated, userController.delete)
 router.get('/users/oldOrders/:id', secure.isAuthenticated, userController.orders)
 
 
 //RUTAS PRODUCTS
 router.get('/products/register', secure.isAuthenticated, productController.register);
-router.post('/products/register', secure.isAuthenticated, productController.createProduct);
+router.post('/products/register', secure.isAuthenticated,storage.single('image'), productController.createProduct);
 router.get('/products/edit/:id', secure.isAuthenticated, productController.edit)
 router.post('/products/edit/:id', secure.isAuthenticated, productController.doEdit)
 router.get('/products/list/:id', productController.list)
@@ -56,6 +57,7 @@ router.get('/order/delete/:id', secure.isAuthenticated, orderController.deleteOr
 router.get('/order/confirm/:id', secure.isAuthenticated, orderController.confirmOrder)
 router.post('/order/confirm/:id', secure.isAuthenticated, orderController.sendOrder)
 router.get('/order/rebuy/:id', secure.isAuthenticated, orderController.rebuy)
+
 
 
 

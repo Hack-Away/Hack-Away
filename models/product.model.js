@@ -36,6 +36,19 @@ const productSchema = new Schema({
         required:true,
         default: 5,
     },
+    avatarProd:{
+        type: String,
+        default: function() {
+            return `https://i.pravatar.cc//150?u=${this.id}`
+        }
+    },
+    location: {
+        type:String,
+        default:"Point"
+    },
+    coordinates:[Number]
+
+    },
     qty:{
         type:Number,
         default:1

@@ -1,0 +1,115 @@
+[
+    {
+    "name": "Pastel 3 antojos",
+    "price":4.50,
+    "allergies":["Wheat","milk"],
+    "avatarProd":"https://res.cloudinary.com/dazypdtba/image/upload/v1613936009/public/uploads/tylhnm9inchs4zjzbutk.jpg",
+    "img":"ironhacker Coding",
+    "productTime":5,
+    "createdBy":"603116ef315b3d83776c9386",
+    "rating":5,
+    "description":" Después de entrarle duro a la comida un deliciosos pastel casero de no 1 ni 2 sino tres dulces niveles para compartir o no!"
+    },
+    {
+    "name": "Coctel de Camarones",
+    "price":12,
+    "allergies":["seafood"],
+    "avatarProd":"https://res.cloudinary.com/dazypdtba/image/upload/v1613824227/public/uploads/cfyiykabl0psefh1vhsx.jpg",
+    "img":"",
+    "productTime":10,
+    "createdBy":"6032b182ace5e80f346c715e",
+    "rating":5,
+    "description":"Un delicioso coctel de camaron en nuestra salsa casera servido en una copa de campeones! excelente para acompañarse con una michelada, sobretodo para eso de la cruda realidad!!"
+    },
+    {
+    "name": "Tacos al pastor",
+    "price": 13,
+    "allergies":["Fruit"],
+    "avatarProd":"https://res.cloudinary.com/dazypdtba/image/upload/v1613937798/public/uploads/rucnaojjak67abx65cjk.jpg",
+    "img":"",
+    "productTime":13,
+    "createdBy":"6032b182ace5e80f346c715e",
+    "rating":5,
+    "description":"Los legendarios tacos al pastor vienen en un presentación de 3 acompañados de nuestras salsa casera y cilantro cebolla piña , estos son los levanta muertos para después de la parranda! "
+    },
+    {
+    "name": "Esquites",
+    "price": 8,
+    "allergies":["vegetables","milk"],
+    "avatarProd":"https://res.cloudinary.com/dazypdtba/image/upload/v1613936130/public/uploads/byehl0kpvoo9vsbdw7nh.jpg",
+    "img":"",
+    "productTime":5,
+    "createdBy":"6032b182ace5e80f346c715e",
+    "rating":5,
+    "description":"Dos mazorcas de maíz que por supuesto van acompañadas de chile y limón (lima), con posibilidad de acompañar con nata excelente para consumir entre comidas o antes de la parranda"
+    },
+    {
+    "name": "Chile relleno",
+    "price": 12,
+    "allergies":["vegetables","milk"],
+    "avatarProd":"https://res.cloudinary.com/dazypdtba/image/upload/v1613936789/public/uploads/uvhzuoh0caddcmsaewve.jpg",
+    "img":"",
+    "productTime":11,
+    "createdBy":"6032b182ace5e80f346c715e",
+    "rating":5,
+    "description":"Para los osados es como jugar a la ruleta rusa uno de 10 es súper picantes chile relleno de queso fresco y le damos unos revolcones en migajas pan para después darle un baño en nuestra mismísima salsa "
+    },
+    {
+    "name": "tweenscakes",
+    "price": 12,
+    "allergies":["milk","Eggs"],
+    "avatarProd":"",
+    "img":"",
+    "productTime":11,
+    "createdBy":"603116ef315b3d83776c9386",
+    "rating":5,
+    "description":"Si crees que los 3 cafés irlandeses que te tomaste te la están jugando no visión doble son dos los deliciosos cupcakes caseros que tenemos en nuestra orden los cuales puedes compartirlos o mejor dicho puedes mostrar a tu acompañante doblemente como los disfrutas!"
+    },
+    {
+    "name": "Paste de frutos dil mare",
+    "price": 12,
+    "allergies":["fish"],
+    "avatarProd":"https://res.cloudinary.com/dazypdtba/image/upload/v1613931979/public/uploads/kis51udtmehldkso0zep.jpg",
+    "img":"",
+    "productTime":10,
+    "createdBy":"60329da7cf1e81de732eb08f",
+    "rating":4,
+    "description":"Increíble pasta hecha por nuestras propias manos acompañada de frutos del mar como en el mediterráneo o en la misma Italia nuestro plato que es la estrella!"
+    },
+    {
+    "name": "Pizza de jamon",
+    "price": 13,
+    "allergies":["wheat"],
+    "avatarProd":"https://res.cloudinary.com/dazypdtba/image/upload/v1613931023/public/uploads/uzgmfopvb7nqcetzzoai.jpg",
+    "img":"",
+    "productTime":10,
+    "createdBy":"60329da7cf1e81de732eb08f",
+    "rating":4,
+    "description":"Deliciosa pizza de jamón con nuestra salsa casera hecha con la receta de mi abuelita!"
+    },
+    {
+    "name": "Brownis",
+    "price": 4,
+    "allergies":["eggs","milk"],
+    "avatarProd":"https://res.cloudinary.com/dazypdtba/image/upload/v1613937565/public/uploads/degtl00v9tyqliwgvppe.jpg",
+    "img":"",
+    "productTime":5,
+    "createdBy":"603116ef315b3d83776c9386",
+    "rating":4,
+    "description":"Si terminaste de comer o decidiste terminar la dieta tenemos estos deliciosos Bownis caseros!"
+    },
+    {
+    "name": "Ignacios",
+    "price": 10,
+    "allergies":["milk"],
+    "avatarProd":"https://res.cloudinary.com/dazypdtba/image/upload/v1613937163/public/uploads/fcgcn4hepx2mzvuxrv15.jpg",
+    "img":"",
+    "productTime":8,
+    "createdBy":"6032b182ace5e80f346c715e",
+    "rating":5,
+    "description":"Para entrar le con gusto a la comida un aperitivo o un entre comidas algo para que la pansa sea feliz nachos con frijoles refrito queso pico de gallo y nuestra salsa!"
+    }
+
+]
+
+

@@ -16,7 +16,6 @@ hbs.registerHelper('maxText', (text) => {
     return text.slice(0,50) + '...'
 })
 
-// creo que este de abajo ya no se utiliza
 hbs.registerHelper('userRole', (role) => {
 
  if (role === 'admin') { 
