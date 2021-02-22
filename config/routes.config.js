@@ -4,7 +4,7 @@ const productController = require('../controllers/product.controller')
 const userController = require('../controllers/user.controller')
 const Product = require('../models/product.model')
 const secure = require('../middlewares/secure.middlewares')
-const cartController = require('../controllers/cart.controller')
+const orderController = require('../controllers/order.controller')
 const GOOGLE_OAUTH_SCOPES = ['https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile'];
 const passport = require('passport');
 const commonController = require('../controllers/common.controller')
@@ -30,6 +30,7 @@ router.get('/users/logout', secure.isAuthenticated, userController.logout);
 router.get('/users/edit/:id', secure.isAuthenticated, userController.edit)
 router.post('/users/edit/:id', secure.isAuthenticated, userController.doEdit)
 router.get('/users/delete/:id', secure.isAuthenticated, userController.delete)
+router.get('/users/oldOrders/:id', secure.isAuthenticated, userController.orders)
 
 
 //RUTAS PRODUCTS
@@ -44,9 +45,18 @@ router.get('/products/filter', productController.filter)
 
 
 
-//RUTAS CART
-router.get('/cart/:id', cartController.add);
-router.post('/cart/create', cartController.create);
+//RUTAS ORDER
+
+router.get('/order/list', secure.isAuthenticated, orderController.list)
+router.get('/order/add/:id', secure.isAuthenticated, orderController.addToOrder)
+router.get('/order/update/add/:id', secure.isAuthenticated, orderController.addProduct)
+router.get('/order/update/rest/:id', secure.isAuthenticated, orderController.restProduct)
+router.get('/order/update/delete/:id', secure.isAuthenticated, orderController.deleteProduct)
+router.get('/order/delete/:id', secure.isAuthenticated, orderController.deleteOrder)
+router.get('/order/confirm/:id', secure.isAuthenticated, orderController.confirmOrder)
+router.post('/order/confirm/:id', secure.isAuthenticated, orderController.sendOrder)
+router.get('/order/rebuy/:id', secure.isAuthenticated, orderController.rebuy)
+
 
 
 //RUTAS COMMENTS

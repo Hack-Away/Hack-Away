@@ -74,7 +74,17 @@ const userSchema = new Schema({
     adress: {
         type: String,
         default: 'Calle Inventada, nº random'
-    }
+    },
+    order: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref:'Order'
+    },
+    oldOrders: [{
+             orders: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Order'
+            },
+    }]
 }, {timestamps: true});
 
 userSchema.pre('save', function (next) {
@@ -90,7 +100,6 @@ userSchema.pre('save', function (next) {
 });
 
 userSchema.methods.checkPassword = function (passwordToCheck) {
-    
     return bcrypt.compare(passwordToCheck, this.password);
 }
 
