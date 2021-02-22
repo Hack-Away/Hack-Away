@@ -29,7 +29,7 @@ module.exports.home = (req, res, next) => {
             res.redirect('/')
         })
 
-   res.render('home')
+  // res.render('home')
 }
 
 module.exports.about = (req, res,next) => {
