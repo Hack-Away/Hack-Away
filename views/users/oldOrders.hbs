@@ -1,0 +1,34 @@
+<div>
+    <div>
+        <h1 class="text-center m-4">Old Orders of {{user.name}}</h1>
+    </div>
+    <div>
+        <div class="card d-flex flex-row justify-content-around m-2 p-2 bg-dark">
+            <div class="col-1"></div>
+            <h6 class="text-white col-2">Order State</h6>
+            <h6 class="text-white text-center col-3">Date</h6>
+            <h6 class="text-white text-center col-3">Price(Ud)</h6>
+            <h6 class="text-white text-center col-3"></h6>
+        </div>
+    </div>
+    <div>
+        
+        {{#each orders as |order|}}
+            <div class="card d-flex flex-row m-2 p-2 align-items-center justify-content-around">
+                <h6 class="text-center p-1 col-2">{{order.state}}</h6>
+                <small class="text-center p-1 col-2">{{dateFixed order.estimatedTime}}</small>
+                   
+                <div class="">        
+                 {{#each order.productList as |product|}}
+                    <div class="d-flex flex-row px-2">
+                        <h6 class="px-1">{{product.product.name}}</h6>
+                        <h6 class="px-1">{{product.qty}}</h6>
+                    </div>
+                 {{/each}}              
+                </div>
+                <a href="/order/rebuy/{{order.id}}"><button class="btn btn-success">Volver a Comprar</button></a>
+                
+            </div>
+        {{/each}}
+    </div>
+</div>

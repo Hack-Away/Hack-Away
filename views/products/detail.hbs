@@ -36,11 +36,9 @@
                     <div class="d-flex flex-row justify-content-end p-1 mt-2">
 
                         <a href="/comments/new/{{product.id}}"><button class="btn btn-primary">Leave a Comment</button></a>
-                        <a href="/cart/{{product.id}}"><button class="btn btn-secondary mx-1">Add to Cart</button></a>
-
-                       
-                             <a href="/products/edit/{{product.id}}" class="{{userAdmin product.createdBy sessionUser}}"><button class="btn btn-primary mx-1">Edit</button></a>
-                             <a href="/products/delete/{{product.id}}" class="{{userAdmin product.createdBy sessionUser}}"><button class="btn btn-danger mx-1">Delete</button></a>
+                        <a href="/order/add/{{product.id}}"><button class="btn btn-secondary mx-1">Add to Cart</button></a>                    
+                        <a href="/products/edit/{{product.id}}" class="{{userAdmin product.createdBy sessionUser}}"><button class="btn btn-primary mx-1">Edit</button></a>
+                        <a href="/products/delete/{{product.id}}" class="{{userAdmin product.createdBy sessionUser}}"><button class="btn btn-danger mx-1">Delete</button></a>
                             
                     </div>
                 </div>

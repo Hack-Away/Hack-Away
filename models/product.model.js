@@ -35,7 +35,6 @@ const productSchema = new Schema({
         type:Number,
         required:true,
         default: 5,
-
     },
     avatarProd:{
         type: String,
@@ -49,7 +48,23 @@ const productSchema = new Schema({
     },
     coordinates:[Number]
 
+    },
+    qty:{
+        type:Number,
+        default:1
+    }
+
 }, {timestamps:true});
+
+productSchema.virtual('product', {
+    ref: 'Order',
+    localField: '_id',
+    foreignField: 'product',
+    options: {
+        limit: 1
+    }
+})
+
 
 const Product = mongoose.model('Product', productSchema);
 module.exports = Product;

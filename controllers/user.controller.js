@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 const mailer = require('../config/mailer.config');
 const passport = require('passport');
 const Product = require('../models/product.model')
+const Order = require('../models/order.model')
 
 
 module.exports.register = (req, res, next) => {
@@ -35,21 +36,19 @@ module.exports.doRegister = (req, res, next) => {
 
        return User.create(req.body)
         .then((user) => {
-          console.log('--- USER CONTROLLER --- Crea un usuario nuevo y lo registra en la base de datos')
-          mailer.sendValidationEmail(user.email, user.verified.token, user.name);
-          console.log('--- USER CONTROLLER --- Termina la funcion de envio de Mail de Verificacion al usuario', user.mail)
-          // req.flash('data', JSON.stringify({verification: true}))
-          // res.redirect('users/profile')
-          res.render('users/profile', { sessionUser: user });
+            console.log('--- USER CONTROLLER --- Crea un usuario nuevo y lo registra en la base de datos')
+            mailer.sendValidationEmail(user.email, user.verified.token, user.name);
+            console.log('--- USER CONTROLLER --- Termina la funcion de envio de Mail de Verificacion al usuario', user.mail)
+            // req.flash('data', JSON.stringify({verification: true}))
+            // res.redirect('users/profile')
+            res.render('users/profile', { sessionUser: user });
         })
         .catch(error => {
-          if(error instanceof mongoose.Error.ValidationError){
-            renderWithErrors(error.errors)
-          }else {
-            renderWithErrors(error)
-            
-          }
-          
+            if(error instanceof mongoose.Error.ValidationError){
+              renderWithErrors(error.errors)
+            }else {
+              renderWithErrors(error)
+            }
         })
     }
   
@@ -103,6 +102,7 @@ module.exports.doLogin = (req, res, next) => {
 module.exports.logout = (req, res, next) => {
   req.logout();
   res.locals.sessionUser = ''
+  res.locals.currentCartId = ''
   res.redirect('/');
 };
 
@@ -235,5 +235,24 @@ module.exports.delete = (req,res,next) => {
       .catch(error => {
         renderWithErrors(error)
       })
+}
+
+
+module.exports.orders = (req, res ,next) => {
+
+  User.findById(req.params.id)
+    .then(user => {
+      console.log(user)
+      Order.find({createdBy: user})
+          .populate('createdBy')
+          .populate('productList.product')
+          .then(orders => {
+               orders.reverse().shift()
+               res.render('users/oldOrders', {user, orders})
+          })
+          .catch(error => console.log(error))
+    })
+    .catch(error => console.log(error))
+ 
 }
 

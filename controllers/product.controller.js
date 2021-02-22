@@ -18,13 +18,15 @@ module.exports.createProduct = (req, res, next) => {
             errors: errors
         });
     };
+
     
-    const product = req.body;
+   const product = req.body;
     product.createdBy = res.locals.sessionUser.name;
 
     if(req.file){
         product.avatarProd= req.file.path;
     }
+
     const sessionUser = res.locals.sessionUser
 
     console.log(req.file);
@@ -32,11 +34,9 @@ module.exports.createProduct = (req, res, next) => {
     Product.create(product)
         .then(product => {
             if (product){
-                
-                console.log('crea el producto', product)
+
                 res.redirect(`../users/profile/${sessionUser.id}`)
             } else {
-                console.log('no crea el producto porque no existe')
                 next()
             }
         })
@@ -67,7 +67,6 @@ module.exports.edit = (req,res,next) => {
         .catch(error => {
             renderWithErrors(error)
         })
-    
 }
 
 module.exports.doEdit = (req, res, next) => {
@@ -119,7 +118,6 @@ module.exports.list = (req, res, next ) => {
                 })
         })
         .catch(error => console.log(error))
-   
 }
 
 module.exports.delete = (req, res, next) => {
@@ -189,13 +187,24 @@ module.exports.filter = (req, res, next) => {
     if (filter.name) filter.name = new RegExp(filter.name, 'i')
     else delete filter.name
 
-    console.log(sort)
+    let sortBy = {}
 
-    const sortBy = {
-        price: sort.price === 'cheaper' ? 1 : -1,
-        productTime: sort.time === 'fast' ? 1 : -1,
-        rating: sort.rating === "best" ? -1 : 1
-    }   
+    switch (sort) {
+        case 'cheaper':
+            sortBy = {
+                price: sort.type === 'cheaper' ? 1 : -1  
+                }
+            break;
+        case 'best':
+            sortBy = {
+                rating: sort.type === 'best' ? -1 : 1
+            }
+            break;
+        default:
+            sortBy = {
+                rating: sort.type === 'best' ? -1 : 1
+            }
+    }
     
     Product.find(filter)
             .sort(sortBy)
@@ -203,7 +212,6 @@ module.exports.filter = (req, res, next) => {
                 res.render('products/filter', { products })
             })
             .catch(error => { 
-                console.log('---FILTER--- no encuentra productos')
                 console.log(error)
                 next() 
             })
