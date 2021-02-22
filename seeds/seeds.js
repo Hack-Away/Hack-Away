@@ -6,8 +6,8 @@ const userData = require('../data/users.json');
 
 require('../config/db.config')
 
-products.create(productData);
-user.create(userData);
+Product.create(productData);
+User.create(userData);
 
 
 

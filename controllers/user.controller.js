@@ -90,6 +90,7 @@ module.exports.doLogin = (req, res, next) => {
           else res.redirect('/');
       });
     } else{
+
       res.render('users/login', {user: req.body, errors: validations});
     }
     

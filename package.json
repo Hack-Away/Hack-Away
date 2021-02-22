@@ -41,7 +41,6 @@
     "passport": "^0.4.1",
     "passport-google-oauth": "^2.0.0",
     "passport-local": "^1.0.0",
-    "qs": "^6.9.6",
-    "uuid": "^8.3.2"
+    "qs": "^6.9.6"
   }
 }

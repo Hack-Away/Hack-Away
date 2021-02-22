@@ -1,7 +1,8 @@
 [
     {
+
     "name": "rest taurant",
-    "role": "Restaurant",
+    "role": "user",
     "email":"",
     "avatar":"https://res.cloudinary.com/dazypdtba/image/upload/v1613939648/public/uploads/leypsozitesolplpabdi.jpg",
     "img":"",
@@ -21,7 +22,7 @@
     },
    {
     "name": "restmexmex",
-    "role": "admin",
+    "role": "user",
     "email":"",
     "avatar":"https://res.cloudinary.com/dazypdtba/image/upload/v1613939325/public/uploads/uubz3du1dlhehxxqj8fu.jpg",
     "img":"",

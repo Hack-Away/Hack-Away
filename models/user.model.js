@@ -47,12 +47,12 @@ const userSchema = new Schema({
     },
     kitchen:{
         type:String,
-        enum:['Mediterranean', 'Chinese', 'Mexican' ,'Arabic', 'Indian','italian'],
+        enum:['Mediterranean', 'Chinese', 'Mexican' ,'Arabic', 'Indian','Italian'],
         //required: 'The  is mandatory'
     },
     favorites:{
         type:String,
-        enum:['Mediterranean', 'Chinese', 'Mexican' ,'Arabic', 'Indian','italian']
+        enum:['Mediterranean', 'Chinese', 'Mexican' ,'Arabic', 'Indian','Italian']
             
     },
     verified: {
