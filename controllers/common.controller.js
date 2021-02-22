@@ -30,5 +30,13 @@ module.exports.home = (req, res, next) => {
         })
 }
 
+module.exports.about = (req, res,next) => {
+    res.render('about')
+}
+
+module.exports.cookies = (req, res, next) => {
+    res.render('cookies')
+}
+
 
 
