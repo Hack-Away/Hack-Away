@@ -1,7 +1,7 @@
 
 <h1 class="text-center py-4">Buscador de productos</h1>
 
-<div class="bg-secondary rounded p-2 m-2">
+<div class="bg-dark  p-2 m-2">
     <form action="/products/filter" method="get" class="d-flex flex-row justify-content-around">
       
         <input type="text" placeholder="Search..." class="form-control m-1" name="filter.name" value={{Search}}>
@@ -17,6 +17,9 @@
             <option value="Italian">Italian</option>
         </select>
         -->
+        
+
+
         <select name="sort.type" class="form-control m-1">
             <option value="best" >Best Valuated</option>
             <option value="cheaper">Cheaper</option>
@@ -36,23 +39,34 @@
         </select>
         -->
         
-        <button type="submit" class="btn btn-dark">Search</button>
+        <button type="submit" class="btn btn-secondary">Search</button>
  
     </form>
 </div>
-<div class="row bg-dark py-2 my-2">
-    <div class="row  mx-auto">
+<div class="row py-2 my-2">
+    <div class="row mx-auto">
         {{#each products as |product|}}
-        <a href="/products/detail/{{product.id}}" class="col-xs-12 col-md-4  text-decoration-none col-lg-3 p-1  justify-content-center px-3">
-            <div class="d-flex flex-column align-items-center m1 bg-secondary rounded h-100">
-                <h6 class="text-center text-decoration-none text-dark pt-2">{{product.name}}</h6>
-                <p class="text-white text-decoration-none">{{product.createdBy}}</p>    
-                <div class="d-flex justify-content-around">
-                    <p class="bg-warning rounded mx-1 p-1 px-2 text-decoration-none text-dark"><strong>{{product.price}}€</strong></p>
-                    <p class="bg-light rounded mx-1 p-1 px-2 text-decoration-none text-dark"><i class="fa fa-star color-warning" aria-hidden="true"></i>{{product.rating}}</p>
-                </div>   
+       
+        <a href="/products/detail/{{product.id}}" class="col-xs-12 col-md-4  text-decoration-none col-lg-3 p-1 justify-content-center px-3 my-2">
+            <div class="d-flex flex-column align-items-center m1 bg-dark rounded-25 h-100" 
+                        style="box-shadow: 9px 10px 6px -5px rgba(77,77,77,0.75);
+                        -webkit-box-shadow: 9px 10px 6px -5px rgba(77,77,77,0.75);
+                        -moz-box-shadow: 9px 10px 6px -5px rgba(77,77,77,0.75);">
+                <picture >
+                    <img class="image-filter" src="{{product.avatarProd}}" alt="" style="height:200px;max-height: 200px; width:100%;">
+                </picture>
+                <div>
+                    <h5 class="text-center text-decoration-none text-white pt-2 mt-2"><strong>{{product.name}}</strong></h5>
+                    <p class="text-white-50 text-decoration-none text-center">{{product.createdBy}}</p>    
+                    <div class="d-flex justify-content-around">
+                        <p class="bg-warning rounded mx-1 p-1 px-2 text-decoration-none text-dark"><strong>{{product.price}}€</strong></p>
+                        <p class="bg-light rounded mx-1 p-1 px-2 text-decoration-none text-dark"><i class="fa fa-star color-warning" aria-hidden="true"></i>{{product.rating}}</p>
+                    </div>   
+                </div>
             </div>
         </a>
+        
         {{/each}}
+       
     </div>
 </div>

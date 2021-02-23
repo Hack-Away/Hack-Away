@@ -13,7 +13,7 @@ hbs.registerHelper('formError', (error) => {
 });
 
 hbs.registerHelper('maxText', (text) => {
-    return text.slice(0,50) + '...'
+    return text.slice(0,100) + '...'
 })
 
 hbs.registerHelper('userRole', (role) => {

@@ -9,8 +9,16 @@ module.exports.home = (req, res, next) => {
             if (products) {
                 User.find()
                     .then(users => {
+                        products.sort(() => Math.random() - 0.5)
+                        users.sort(() => Math.random() - 0.5)
+                        for (let user of users){
+                            if (user.role === 'costumer'){
+                                users.splice(0, user)
+                            }
+                        }
                         let productsLimit = products.slice(0, 3)
                         let usersSortList = users.slice(0, 3);
+                       
                         res.render('home', { 
                             products: productsLimit,
                             users: usersSortList

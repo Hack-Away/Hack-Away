@@ -189,6 +189,10 @@ module.exports.filter = (req, res, next) => {
 
     let sortBy = {}
 
+    console.log(sort)
+
+
+
     switch (sort) {
         case 'cheaper':
             sortBy = {

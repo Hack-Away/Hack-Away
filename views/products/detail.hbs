@@ -7,7 +7,9 @@
 
         <div class="text-decoration-none text-dark">
 
-            <div class="card m-1 p-3 d-flex flex-row align-items-around">
+            <div class="bg-dark m-1 p-3 d-flex flex-row align-items-around text-white" style="box-shadow: 9px 10px 6px -5px rgba(77,77,77,0.76);
+                                                                                                -webkit-box-shadow: 9px 10px 6px -5px rgba(77,77,77,0.76);
+                                                                                                -moz-box-shadow: 9px 10px 6px -5px rgba(77,77,77,0.76);">
 
                 <div class="row">
 
@@ -18,7 +20,7 @@
                     <div class="col-xs-12 col-md-8 float-left ">
                         <div class="d-flex flex-row justify-content-between align-items-center">
                             <h4><strong>{{product.name}}</strong></h4>
-                            <h4 class="bg-warning rounded-circle py-2 px-3"><strong>{{product.rating}}</strong></h4>
+                            <h4 class="bg-warning rounded-circle py-2 px-3 text-dark"><strong>{{product.rating}}</strong></h4>
                         </div>
                         <div class="d-flex flex-row justify-content-between">
                             <p>Price: {{product.price}} €</p>
@@ -47,15 +49,17 @@
                 <h3 class="text-center my-3">Comentarios de {{product.name}}</h3>
                
                 {{#each comments as |comment|}}
-                <div class="card my-2 p-3">
+                <div class="bg-secondary my-2 p-3" style="box-shadow: 9px 10px 6px -5px rgba(77,77,77,0.76);
+                                                        -webkit-box-shadow: 9px 10px 6px -5px rgba(77,77,77,0.76);
+                                                        -moz-box-shadow: 9px 10px 6px -5px rgba(77,77,77,0.76);">
                     <div class="row">
                         <div class="col-sx-12 col-sm-10 d-flex flex-column ml-1">
-                            <h6 class="bg-secondary text-white p-1 rounded">{{comment.title}} - <strong class="text-dark">{{comment.createdBy}}</strong></h6> 
-                            <p class="text-muted mx-1">{{comment.message}}</p>
+                            <h6 class="bg-dark text-white p-1 rounded">{{comment.title}} - <span class="text-secondary">@{{comment.createdBy}}</span></h6> 
+                            <p class="text-white mx-1">{{comment.message}}</p>
                         </div>
                         <div class="col-sx-12 col-sm-2 d-flex ">
-                            <div class="d-flex justify-content-center align-items-center card w-100">
-                                <h1 class="mx-3 text-warning"> {{comment.rating}} </h1>
+                            <div class="d-flex justify-content-center align-items-center bg-warning w-100">
+                                <h1 class="mx-3 text-dark"> {{comment.rating}}</h1>
                             </div>
                         </div>
                     </div>
