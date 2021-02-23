@@ -2,11 +2,7 @@
     <div class="d-flex flex-column align-items-center">
         <picture>
             <img src="https://res.cloudinary.com/dazypdtba/image/upload/v1614038641/public/uploads/logo-hack-away-low_avqj3v.jpg" alt="">
-        </picture>
-        <div class="mb-5">
-            <p class="text-center"> Best take-away app ever</p>
-        </div>
-    
+        </picture>    
     </div>
                             
     <div class="w-100 pb-5">
@@ -16,17 +12,23 @@
                     <h3 class="text-center text-dark mb-3"><strong>- Try this products - </strong></h3>
                     {{#each products as |product|}}
                     <a href="/products/detail/{{product.id}}" class="text-decoration-none text-dark">
-                        <div class="card bg-dark my-3 d-flex flex-row" style="box-shadow: 9px 10px 6px -5px rgba(77,77,77,0.76);
+                        <div class="bg-dark my-3 d-flex flex-row" style="box-shadow: 9px 10px 6px -5px rgba(77,77,77,0.76);
                                                                                        -webkit-box-shadow: 9px 10px 6px -5px rgba(77,77,77,0.76);
                                                                                        -moz-box-shadow: 9px 10px 6px -5px rgba(77,77,77,0.76);"> 
                             
-                            <img src="{{product.avatarProd}}" alt="" style=" max-height:200px; width:auto;">
-                            <div class="px-2 d-flex flex-column mx-3">
-                                <div class="d-flex flex-row justify-content-start mt-3">
-                                    <p class="text-white"><strong>{{product.name}} - </strong></p>
-                                    <p class="text-secondary fs-6"> - {{product.createdBy}}</p>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6">
+                                    <img src="{{product.avatarProd}}" alt="" style=" max-height:200px; width:100%; ">
                                 </div>
-                                <p class="text-white">{{{maxText product.description}}}</p>
+                            
+                                <div class="d-flex flex-column justify-content-around mt-2 col-xs-12 col-sm-6">
+                                    <div class="p-3">
+                                        <p class="text-white"><strong>{{product.name}}</strong></p>
+                                        <P class="text-white-50">{{{maxText product.description}}}</P>
+                                    </div>
+                                </div>
+                            
+                            
                             </div>
                         </div>
                     </a>
@@ -38,17 +40,23 @@
                     <h3 class="text-center text-dark mb-3"><strong>- Know new Restaurants - </strong></h3>
                     {{#each users as |userList|}}
                     <a href="/users/profile/{{userList.id}}" class="text-decoration-none text-dark">
-                         <div class="card my-3 d-flex flex-row align-items-around bg-dark" style="box-shadow: 9px 10px 6px -5px rgba(77,77,77,0.76);
+                         <div class="my-3 d-flex flex-row align-items-around bg-dark" style="box-shadow: 9px 10px 6px -5px rgba(77,77,77,0.76);
                                                                                        -webkit-box-shadow: 9px 10px 6px -5px rgba(77,77,77,0.76);
                                                                                        -moz-box-shadow: 9px 10px 6px -5px rgba(77,77,77,0.76);"> 
-                                                                                       
-                             <img src="{{userList.avatar}}" alt="" style=" max-height:200px; width:auto; ">
-                             <div class="px-3">
-                                 <div class="d-flex flex-row justify-content-between mt-2">
-                                     <p class="text-white"><strong>{{userList.name}}</strong></p>                                  
-                                 </div>
-                                 <P class="text-white-50">{{{maxText userList.description}}}</P>
-                             </div>
+                            <div class="row">    
+                                <div  class="col-xs-12 col-sm-6">                                               
+                                    <img src="{{userList.avatar}}" alt="" style=" max-height:200px; width:100%; ">
+                                </div>
+                                
+                                    <div class="d-flex flex-column justify-content-around mt-2 col-xs-12 col-sm-6">
+                                        <div class="p-3">
+                                            <p class="text-white"><strong>{{userList.name}}</strong></p>    
+                                            <P class="text-white-50">{{{maxText userList.description}}}</P>
+                                        </div>
+                                    </div>
+                                    
+                                
+                            </div>
                         </div>
                     </a>
                     {{/each}}

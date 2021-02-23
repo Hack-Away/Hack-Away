@@ -1,25 +1,24 @@
 
 <div class="container-fluid">
     <div class="row col-md">
-        <nav class="d-flex flex-row card p-3 bg-dark justify-content-between border border-dark mt-3">
-          
-            <ul class="nav justify-content-center">
-               
+        
+        <nav class="navbar d-flex flex-row card p-3 bg-dark justify-content-between border border-dark mt-3 align-items-center collapse navbar-collapse" id="navbarTogglerDemo01">
+            <ul class="nav justify-content-center">              
                 <li class="nav-item d-flex flex-row align-items-center">
                     <a href="/" class="text-decoration-none text-white p-1 "><img src="" alt=""><img src="https://res.cloudinary.com/dazypdtba/image/upload/v1614039850/public/uploads/lgo-doble-transp-largo_vlnk3i.png" style="max-width:150px" alt=""></a>
                     <a href="/products/filter" class="text-decoration-none text-white p-1 mx-2"><strong>Products Filter</strong></a>
                 </li>
             </ul>
-            <ul class="nav ">
+            <ul class="nav d-flex flex-row text-decoration-none list-style-none collapse">
                 {{#if sessionUser}} <p class="text-secondary mx-2 text-right"><a href="/users/profile/{{sessionUser.id}}" class="text-secondary"> Welcome {{sessionUser.name}} </a></p>{{/if}}
                 {{#unless sessionUser}} <p class="text-secondary mx-2 text-right"><a href="/users/register" class="text-secondary text-decoration-none">Create New User</a> or </p>{{/unless}}
-                <li class="nav-item">  
-                    
+                <li class="nav-item">                
                     {{#unless sessionUser}}<a href="/users/login" class="text-decoration-none text-white p-1 text-right">Log In</a>{{/unless}}
                     {{#if sessionUser}}<a href="/order/list" class="text-decoration-none text-white p-1 text-right">View Cart</a>{{/if}}
                     {{#if sessionUser}}<a href="/users/logout" class="text-decoration-none text-white p-1 text-right">Log Out</a>{{/if}}
                 </li>
             </ul>
+
         </nav>
     </div>
 </div>
