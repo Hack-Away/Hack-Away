@@ -1,1 +1,103 @@
-about
+<style>
+    .container {
+        position: relative;
+        width: 35%;
+    }
+
+    .image {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    .overlay {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 100%;
+        width: 100%;
+        opacity: 0;
+        transition: .5s ease;
+        background-color: #222222;
+    }
+
+    .container:hover .overlay {
+        opacity: 1;
+    }
+
+    .text {
+        color: white;
+        font-size: 20px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        text-align: center;
+    }
+</style>
+
+<div>
+    <div>
+        <h2 class="text-center font-weight-bold">Us! </h2>
+        <p class="text-center font-weight-bold">Learn more about our Us!</p>
+    </div>
+    <div class="row">
+        <div class="col-sx-12 col-sm-6 container ">
+            <img src="https://res.cloudinary.com/dazypdtba/image/upload/v1614081639/us_ggc9da.jpg" alt="Avatar"
+                class="image">
+            <div class="overlay">
+                <div class="text">
+                    <p>Misión </p>
+                    <p>Nuestra Misión es ayudar a los ciudadanos hambrientos en apuros que solo quieren regresar a casa o
+                        salir de casa y recoger su comida después de un largo día en estos tiempos de pandemia.
+                        Al mismo tiempo es ayudar a esos restaurantes a poder llegar a sus clientes de una manera simple y
+                        darse a conocer de un forma fácil sin tener que descuidar su presupuesto!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sx-12 col-sm-6 container " >
+            <img src="https://res.cloudinary.com/dazypdtba/image/upload/v1614081466/Mision_sarikb.jpg" alt="Avatar"
+                class="image">
+            <div class="overlay">
+                <div class="text">
+                    <p>Visión</p>
+                    <p>Nos gustaría garantizar este vinculo sencillo entre restaurantes de meno a mayor escala y sus
+                        clientes a nivel local o un forma mas global de la manera mas simple y entendiendo los cambios
+                        drásticos que sufre nuestro entorno a causa de la situación actual socio-económicamente
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div  class="col-sx-12 col-sm-6 container ">
+            <img src="https://res.cloudinary.com/dazypdtba/image/upload/v1614081444/valores_mb0el5.jpg" alt="Avatar"
+                class="image">
+            <div class="overlay">
+                <div class="text ">
+                    <p>Valores</p>
+                    <p>Nosotros somos nuestros clientes y restaurantes somos los vecinos y familiares y amigos que quieren
+                        hacer algo mas por el progimo y por esto mantenemos nuestro nuestros valores en la forma de trabjar
+                        y interactuar con nuestros clientes!!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sx-12 col-sm-6 container ">
+            <img src="https://res.cloudinary.com/dazypdtba/image/upload/v1614081523/vision_jdk0t9.jpg" alt="Avatar"
+                class="image">
+            <div class="overlay">
+                <div class="text">
+                    <p>Nosotros </p>
+                    <p>Somos dos chavales atrapados en este confinamiento con un idea formalizada en proyecto los cuales
+                        queremos hacer un poquito mas y utilizar nuestras habilidades y valores en algo positivo y
+                        contribuir un extra! </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

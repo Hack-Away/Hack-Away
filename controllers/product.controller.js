@@ -191,25 +191,17 @@ module.exports.filter = (req, res, next) => {
 
     console.log(sort)
 
+    if (sort.type === 'best') {
+        sortBy = {
+            rating: sort.type === 'best' ? -1 : 1
+        }}
 
-
-    switch (sort) {
-        case 'cheaper':
-            sortBy = {
-                price: sort.type === 'cheaper' ? 1 : -1  
-                }
-            break;
-        case 'best':
-            sortBy = {
-                rating: sort.type === 'best' ? -1 : 1
-            }
-            break;
-        default:
-            sortBy = {
-                rating: sort.type === 'best' ? -1 : 1
-            }
+    if (sort.type === 'cheaper') {
+        sortBy = {
+            price: sort.type === 'cheaper' ? 1 : -1
+        }
     }
-    
+
     Product.find(filter)
             .sort(sortBy)
             .then(products => {
